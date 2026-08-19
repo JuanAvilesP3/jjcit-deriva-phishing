@@ -4,10 +4,12 @@
 **Línea:** A · **GPU:** Baja · **Días asignados:** 22-23 ago
 
 ## Estado
-- [ ] Ficha de revista completa (JOURNAL.md)
-- [ ] Datos descargados (data/raw/)
-- [ ] Experimento ejecutado (día 1)
-- [ ] Redacción y figuras (día 2)
+- [x] Ficha de revista completa (JOURNAL.md)
+- [x] Datos descargados (data/raw/) — PhishTank (con marca temporal) + Tranco
+- [x] Experimento ejecutado (día 1) — 4 estrategias × 3 modelos
+- [x] Estadística (día 1) — regresión, prueba de Page, comparación de estrategias
+- [x] Figuras generadas (4/4)
+- [ ] Redacción del manuscrito (día 2)
 - [ ] Endurecimiento: DOIs verificados
 - [ ] Endurecimiento: revisión adversarial ronda 1
 - [ ] Endurecimiento: revisión adversarial ronda 2
@@ -51,13 +53,12 @@ Regresión sobre la curva de degradación; test de Page para tendencia monótona
 ### Datasets
 | Nombre | Fuente | Licencia | Verificado |
 |--------|--------|----------|------------|
-| PhishTank | phishtank.org, con marca temporal | Verificar | No |
-| OpenPhish | openphish.com, con marca temporal | Verificar | No |
-| UCI Phishing Websites | UCI | Verificar | No |
-| PhiUSIIL | Verificar fuente | Verificar | No |
-| Tranco / Majestic Million (URLs legítimas) | tranco-list.eu / majestic.com | Verificar | No |
+| PhishTank | data.phishtank.com/data/online-valid.csv, sin registro necesario | Uso de investigación, phishtank.org | Sí — 29,299 URLs con `submission_time` en los últimos 180 días |
+| Tranco (URLs legítimas) | tranco-list.eu/top-1m.csv.zip | Lista pública de investigación | Sí — instantánea única del 19/08/2026, 1M dominios, se muestrean 29,299 |
+| ~~OpenPhish~~ | openphish.com feed comunitario | — | **Descartado** — sin marca temporal por URL (solo snapshot activo) |
+| ~~UCI Phishing Websites / PhiUSIIL~~ | UCI | — | **Descartados** — features pre-extraídas sin fecha por fila |
 
-Crítico: verificar el día 1 que el dataset tenga marca temporal utilizable — si no la tiene, no sirve para este diseño.
+Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por registro, tal como advertía la ficha. Las URLs legítimas de Tranco no tienen fecha por URL (una sola instantánea), así que se les asignó una marca de tiempo sintética uniforme dentro del rango de PhishTank — decisión documentada explícitamente como limitación (la reputación de dominios legítimos no varía en la ventana de estudio; lo que sí varía es el phishing, que es lo que mide el artículo).
 
 ### Citas obligatorias de la revista destino
 1. (pendiente — extraer de trabajos sobre seguridad, detección de intrusiones y ML aplicado a ciberseguridad publicados en JJCIT)
@@ -71,3 +72,17 @@ Crítico: verificar el día 1 que el dataset tenga marca temporal utilizable —
 - Bloqueado en: pendiente ficha de revista y descarga de datos.
 - Siguiente: completar JOURNAL.md y descargar dataset.
 - Tiempo de computo consumido: 0h
+
+## 19/08 - Día 1 completo: verificación, datos, experimento, estadística y figuras
+- Hecho:
+  - Verificación de marca temporal (crítico según la ficha): solo PhishTank la tiene por registro; OpenPhish y los datasets estáticos de UCI se descartaron. PhishTank accesible sin registro, 29,299 URLs de phishing en los últimos 180 días con densidad creciente.
+  - `01_download.py`: PhishTank + Tranco (instantánea, con marca de tiempo sintética uniforme para las URLs legítimas — limitación documentada).
+  - `02_preprocess.py`: 32 características léxicas extraídas (longitud, entropía, subdominios, IP, acortadores, palabras clave sospechosas, etc.), dataset balanceado (58,598 filas).
+  - `03_experiment.py`: 3 modelos × 4 estrategias (aleatoria, fija, ventana deslizante, acumulativa) sobre 6 bloques temporales.
+  - `04_stats.py`: regresión OLS combinada significativa (p=0.022) pero de magnitud pequeña; prueba de Page confirma tendencia monótona decreciente (p=0.004, con la salvedad de que solo hay 3 "jueces"/modelos); reentrenamiento acumulativo supera a ventana deslizante en los 3 modelos (diferencia no significativa con n=5, Wilcoxon p>0.1).
+  - `05_figures.py`: 4 figuras generadas y revisadas visualmente.
+  - **Hallazgo honesto:** la degradación es real y estadísticamente detectable, pero **de magnitud pequeña** (F1 baja de ~0.996 a ~0.984-0.992 según modelo, no un colapso dramático). Hipótesis de por qué: las URLs legítimas (top dominios de Tranco) son léxicamente muy distintas del phishing de cualquier época, así que el clasificador se apoya en señales estables (longitud, HTTPS, número de barras) que no dependen de la campaña de phishing activa. **Esto coincide con un riesgo que la propia ficha anticipaba** ("Degradación menor a la esperada → también es un hallazgo publicable, contradice la intuición del campo") — se reporta tal cual, sin inflar el efecto.
+  - Dos bugs de infraestructura corregidos y propagados a `_shared/figures_style.py` (afecta a los 10 proyectos): (1) backend de matplotlib forzado a `Agg` — el backend interactivo por defecto crasheaba en corridas en segundo plano en Windows; (2) grid global de matplotlib caía en el centro de las celdas de los mapas de calor cuando los ticks se ponen ahí para las etiquetas, deformando visualmente los mapas de calor — se desactiva `ax.grid(False)` en esos ejes.
+- Bloqueado en: nada.
+- Siguiente: redactar `paper/main.tex`, o pasar a otro artículo de la línea A.
+- Tiempo de computo consumido: ~15 min
