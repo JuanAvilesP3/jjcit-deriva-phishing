@@ -86,3 +86,9 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 - Bloqueado en: nada.
 - Siguiente: redactar `paper/main.tex`, o pasar a otro artículo de la línea A.
 - Tiempo de computo consumido: ~15 min
+
+## 20/08 - Redacción del manuscrito
+- Hecho: `paper/main.tex` completo. 2 citas reales de JJCIT buscadas y verificadas descargando el PDF real de cada artículo (no inventadas): Odeh et al. 2021 (PhiBoost, phishing) y Alslman et al. 2024 (DDoS con modelos ensemble). Discusión honesta sobre por qué la degradación medida es pequeña en magnitud (aunque estadísticamente real): la clase legítima (dominios top de Tranco) es lexicalmente muy distinta del phishing sin importar la época, lo que probablemente subestima la deriva real frente a un negativo más difícil — se deja explícito como la limitación más importante y la dirección más prometedora para trabajo futuro.
+- Bloqueado en: nada.
+- Siguiente: Fase 2 o continuar con otro manuscrito.
+- Tiempo de computo consumido: ~30 min
