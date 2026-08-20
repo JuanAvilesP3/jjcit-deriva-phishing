@@ -4,7 +4,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 
-\title{Concept Drift in URL-Based Phishing Detection}
+\title{Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation}
 \author{}
 \date{}
 
@@ -12,23 +12,72 @@
 \maketitle
 
 \begin{abstract}
+Phishing detectors are almost universally evaluated with random train/test splits, which implicitly assume that a URL's characteristics are exchangeable across time. We test that assumption by training three lexical-feature classifiers (random forest, XGBoost, logistic regression) on 180 days of PhishTank-reported phishing URLs plus a matched sample of legitimate domains, and evaluating them under four temporal designs: a random split (the field's default), training on the earliest block and testing on each subsequent block, a sliding retraining window, and cumulative retraining. All three models achieve F1 above 0.98 in every configuration, and the gap between the random-split baseline and the worst temporally-displaced block is small in absolute terms (0.36 to 0.92 percentage points of F1, model-dependent). A regression of F1 on temporal distance is significant only when pooled across models ($p=0.022$); a Page test for a monotonic decreasing trend across the three models as judges is significant ($Z=-2.66$, $p=0.004$). We argue the near-ceiling performance is itself informative: it is largely explained by the choice of negative class (well-established top-ranked domains), whose lexical signature is so distinct from phishing URLs that it remains easy to separate regardless of which time period the phishing examples come from -- a limitation of the standard evaluation design as much as a property of the underlying task.
 \end{abstract}
 
 \section{Introduction}
 
+Phishing is an adversarial problem: attackers change URL patterns, hosting infrastructure, and lexical tricks specifically to evade whatever a detector has already learned to flag. A classifier trained and evaluated with a single random train/test split treats every URL in the dataset as drawn from one stationary distribution, which is precisely the assumption an adversarial, evolving threat violates. If that assumption is wrong, published accuracy figures based on random splits systematically overstate what a detector will achieve once deployed against future, unseen phishing campaigns.
+
+This paper asks how much that gap actually is, using a temporal evaluation design rather than a random one, and compares two common mitigation strategies -- periodic retraining with a sliding window versus cumulative retraining that keeps all historical examples -- to see whether either meaningfully closes it. We evaluate on 180 days of continuously reported phishing URLs, which lets us construct genuinely time-ordered evaluation blocks rather than simulating drift artificially.
+
 \section{Related Work}
+
+Odeh et al.~\citep{odeh2021phiboost} propose PhiBoost, an adaptive-boosting phishing detector built on lexical and host-based URL features, and report strong within-distribution accuracy using a conventional held-out test split -- exactly the evaluation protocol this paper argues is insufficient on its own, since it cannot distinguish a detector that has learned durable phishing indicators from one that has overfit to the particular campaigns present in the training window. Alslman et al.~\citep{alslman2024ddos} evaluate ensemble models (the same broad model family we use here) for DDoS attack detection at scale using Spark, and, like most applied network-security classification work, do not examine whether detection performance is stable as the underlying attack traffic evolves over time; our temporal-block design is directly applicable to that setting as well, and we frame our contribution partly as a methodological recommendation that extends beyond phishing specifically to security classification tasks built on adversarial, time-varying data.
 
 \section{Methodology}
 
+\subsection{Data}
+Phishing URLs were drawn from PhishTank's public feed, which is the only phishing source we found that ships a reliable, unauthenticated \texttt{submission\_time} timestamp per URL (OpenPhish's community feed and the static UCI Phishing Websites / PhiUSIIL datasets do not carry a comparable per-record date and were excluded from this design for that reason). We retained the most recent 180 days (29{,}299 URLs), the earliest weeks of the full historical feed having too few reports per week to support balanced temporal blocks. Legitimate URLs were sampled from the Tranco top-1M list. Because Tranco is a single ranked snapshot rather than a dated feed, each sampled legitimate URL was assigned a synthetic timestamp drawn uniformly over the same 180-day window as the phishing data -- a deliberate simplification, justified because domain reputation for an established, highly ranked site does not meaningfully change on a 180-day horizon, in contrast to phishing infrastructure, which is exactly what this study measures as changing. The final dataset is balanced by construction (29{,}299 phishing, 29{,}299 legitimate).
+
+\subsection{Features}
+We extract 32 lexical features per URL requiring no live network access (URL/hostname/path length, counts of dots/hyphens/digits/special characters, subdomain count, IP-literal hostname flag, presence of a known URL shortener, Shannon entropy of the URL and hostname strings, a count of phishing-associated keywords, and related structural features), consistent with the ficha's specification of an approximately 30-feature lexical set.
+
+\subsection{Temporal evaluation designs}
+Data were sorted by timestamp and divided into six equal-sized blocks by sample count. We evaluate four designs: (i) \emph{random}, an 80/20 random split ignoring time, as a baseline; (ii) \emph{fixed}, training once on block 1 and evaluating separately on blocks 2 through 6, to isolate pure degradation with distance; (iii) \emph{sliding window}, training on block $k$ and evaluating on block $k+1$ for each consecutive pair, simulating periodic retraining on only the most recent data; (iv) \emph{cumulative}, training on blocks $1$ through $k$ and evaluating on block $k+1$, simulating retraining that keeps the full history. All models (random forest, XGBoost, logistic regression) share identical standardized features across designs.
+
+\subsection{Statistical analysis}
+We regress F1 on temporal distance for the fixed design, per model and pooled. Because a linear regression with only three models provides limited power to detect a common monotonic trend, we additionally run a Page test for a monotonic decreasing trend, treating the three models as judges ranking the five temporal-distance conditions. We compare the sliding-window and cumulative strategies with a paired Wilcoxon signed-rank test per model.
+
 \section{Results}
+
+All three models achieve F1 $>0.98$ in every one of the four designs -- there is no configuration in which any model performs poorly in absolute terms. The comparison that matters is relative: Table~\ref{tab:degradation} shows the gap between the random-split baseline and the temporally displaced (fixed-design) evaluations is small (0.09 to 0.35 percentage points of F1 on average across displaced blocks, model-dependent) but non-zero, and grows toward the worst-case block (up to 0.92 points for logistic regression).
+
+\begin{table}[h]
+\centering
+\caption{F1 under random vs.\ temporal (fixed-training) evaluation.}
+\label{tab:degradation}
+\begin{tabular}{lccc}
+\toprule
+Model & F1 (random split) & F1 (temporal, avg.) & F1 (temporal, worst block) \\
+\midrule
+Random Forest        & 0.9952 & 0.9943 & 0.9916 \\
+XGBoost               & 0.9951 & 0.9935 & 0.9902 \\
+Logistic Regression   & 0.9934 & 0.9899 & 0.9842 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+A per-model OLS regression of F1 on temporal distance is directionally negative for all three models but reaches significance only for the pooled fit ($\beta = -0.00136$, $p = 0.022$, $R^2=0.34$); individually, logistic regression is marginal ($p=0.062$) and the two tree ensembles are not significant on their own ($p=0.25$ and $p=0.19$). Given the limited power of three separate five-point regressions, we treat the Page test as the more informative check for a shared monotonic trend: treating the three models as judges ranking F1 across the five temporal-distance conditions, the test rejects the null of no consistent ordering ($L=112$, $Z=-2.66$, $p=0.004$, one-sided), supporting a real, if small, degradation trend common to all three models. (With only three judges the normal approximation underlying this test has limited power, so this result should be read as supportive rather than definitive.)
+
+Comparing mitigation strategies, cumulative retraining outperforms sliding-window retraining for every model (Random Forest: 0.9952 vs.\ 0.9950; XGBoost: 0.9945 vs.\ 0.9939; Logistic Regression: 0.9931 vs.\ 0.9923), consistent with the hypothesis that retaining historical examples helps more than it hurts, but the paired Wilcoxon test does not reach conventional significance for any model individually ($p=0.125$ for logistic regression and XGBoost, $p=0.25$ for random forest) given the small number of paired blocks available.
 
 \section{Discussion}
 
+The central, if unglamorous, finding is that degradation from temporal displacement is real and statistically supported in aggregate, but far smaller in magnitude than the field's framing of concept drift as a first-order threat would suggest. We think this is substantially explained by the design of the negative class rather than by the phishing detection task being inherently easy: our legitimate URLs come from Tranco's top-ranked, long-established domains, whose lexical signature (short, clean hostnames, no IP literals, low entropy, absence of phishing-associated keywords) is so different from phishing URLs that almost any reasonable classifier separates the two classes with ease, and that separation does not depend much on which specific phishing campaigns happen to be in the training set. A harder, more realistic negative class -- newly registered legitimate domains, or domains with URL structures that superficially resemble phishing (long paths, subdomains, marketing redirect chains) -- would very plausibly show a larger temporal gap, because the decision boundary would then depend more on the specific lexical tricks currently in fashion among phishers rather than on the broad, temporally stable distinction between an established domain and an ad hoc one.
+
+This reframes the practical recommendation: the risk is not that lexical phishing detectors trained today will fail outright next month, but that the near-perfect performance reported under a random split (or, as we show, even under most temporal designs against an easy negative class) is a poor guide to performance against near-miss legitimate traffic, which is the regime that actually matters operationally. We would expect the degradation trend that is significant here in aggregate to become the dominant effect, not a marginal one, once the negative class is made realistically hard.
+
 \section{Limitations}
+
+Our features are purely lexical; we do not use page content, WHOIS data, or network/hosting features, all of which could shift the balance between temporal drift and raw separability. PhishTank's reports carry a known reporting-time bias (submission time is not necessarily attack-launch time, and popular/obvious phishing campaigns are reported faster than sophisticated ones). The 180-day window, while the longest span with consistently high weekly volume in the feed we used, is short relative to multi-year drift dynamics reported elsewhere in the literature. Most importantly, as discussed above, the legitimate-URL sampling from top-ranked Tranco domains very likely understates the real-world temporal degradation a deployed system would face against a harder, more realistic negative class; we consider this the most consequential limitation of the design and the most promising direction for a follow-up study.
 
 \section{Conclusion}
 
+Evaluating three lexical phishing classifiers under four temporal designs on 180 days of PhishTank data, we find a small but statistically supported degradation trend when moving from a random split to a temporally displaced evaluation (Page test $p=0.004$), and that cumulative retraining consistently, though not always significantly, outperforms sliding-window retraining. The magnitude of the effect is modest -- well under one F1 point in most configurations -- which we attribute chiefly to a negative class (long-established top domains) that is lexically easy to separate from phishing regardless of when the phishing examples were collected. We recommend that future phishing-detection evaluations pair temporal splitting with a harder negative class before concluding that concept drift is a marginal concern for this task.
+
 \section*{Data Availability}
+The phishing dataset (PhishTank IDs and timestamps), the legitimate-domain sample, extracted features, and analysis code will be published in a public repository with a Zenodo DOI upon submission (see \texttt{README.md} for the current repository location).
 
 \bibliographystyle{plain}
 \bibliography{refs}
