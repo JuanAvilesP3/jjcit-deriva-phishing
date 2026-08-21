@@ -10,7 +10,7 @@
 - [x] Estadística (día 1) — regresión, prueba de Page, comparación de estrategias
 - [x] Figuras generadas (4/4)
 - [ ] Redacción del manuscrito (día 2)
-- [ ] Endurecimiento: DOIs verificados
+- [x] Endurecimiento: DOIs verificados
 - [ ] Endurecimiento: revisión adversarial ronda 1
 - [ ] Endurecimiento: revisión adversarial ronda 2
 - [ ] Revisión cruzada
@@ -92,3 +92,10 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 - Bloqueado en: nada.
 - Siguiente: Fase 2 o continuar con otro manuscrito.
 - Tiempo de computo consumido: ~30 min
+
+
+## 21/08 - Juan — Verificación de referencias (Fase 2)
+- Hecho: los DOIs de las 2 citas se resolvieron uno por uno (HTTP 200/302 contra doi.org) y se confirmó que el contenido de cada artículo coincide con lo citado en el manuscrito. DOIs agregados a `refs.bib` con nota de verificación y fecha.
+- Bloqueado en: nada.
+- Siguiente: revisión adversarial ronda 1 (rol de revisor de la revista destino).
+- Tiempo de computo consumido: ~15 min
