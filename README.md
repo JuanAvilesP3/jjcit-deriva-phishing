@@ -67,13 +67,13 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 
 ## Bitácora
 
-## 18/08 - Montaje
+## 18/08 - Juan — Montaje
 - Hecho: estructura de carpetas creada, plantilla de figuras copiada, repositorio Git inicializado.
 - Bloqueado en: pendiente ficha de revista y descarga de datos.
 - Siguiente: completar JOURNAL.md y descargar dataset.
 - Tiempo de computo consumido: 0h
 
-## 19/08 - Día 1 completo: verificación, datos, experimento, estadística y figuras
+## 19/08 - Juan — Día 1 completo: verificación, datos, experimento, estadística y figuras
 - Hecho:
   - Verificación de marca temporal (crítico según la ficha): solo PhishTank la tiene por registro; OpenPhish y los datasets estáticos de UCI se descartaron. PhishTank accesible sin registro, 29,299 URLs de phishing en los últimos 180 días con densidad creciente.
   - `01_download.py`: PhishTank + Tranco (instantánea, con marca de tiempo sintética uniforme para las URLs legítimas — limitación documentada).
@@ -87,7 +87,7 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 - Siguiente: redactar `paper/main.tex`, o pasar a otro artículo de la línea A.
 - Tiempo de computo consumido: ~15 min
 
-## 20/08 - Redacción del manuscrito
+## 20/08 - Juan — Redacción del manuscrito
 - Hecho: `paper/main.tex` completo. 2 citas reales de JJCIT buscadas y verificadas descargando el PDF real de cada artículo (no inventadas): Odeh et al. 2021 (PhiBoost, phishing) y Alslman et al. 2024 (DDoS con modelos ensemble). Discusión honesta sobre por qué la degradación medida es pequeña en magnitud (aunque estadísticamente real): la clase legítima (dominios top de Tranco) es lexicalmente muy distinta del phishing sin importar la época, lo que probablemente subestima la deriva real frente a un negativo más difícil — se deja explícito como la limitación más importante y la dirección más prometedora para trabajo futuro.
 - Bloqueado en: nada.
 - Siguiente: Fase 2 o continuar con otro manuscrito.
