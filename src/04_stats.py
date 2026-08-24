@@ -4,6 +4,12 @@ P8 - Deriva conceptual en deteccion de phishing por URL
 
   - Regresion OLS de F1 ~ distancia temporal (estrategia "fija"), por
     modelo y combinada.
+  - ANCOVA (F1 ~ distancia + modelo como efecto fijo): la regresion
+    pooled de arriba mezcla, sin controlarlo, las diferencias fijas de
+    F1 base entre los 3 modelos con la tendencia real que se quiere
+    medir (revision adversarial ronda 1). Controlar por modelo no
+    cambia la pendiente (diseno balanceado) pero mejora la precision
+    de su estimacion al sacar esa varianza entre modelos del residuo.
   - Prueba de Page (L) para tendencia monotona decreciente de F1 con
     la distancia, usando los 3 modelos como "jueces". Nota: con solo 3
     jueces la aproximacion normal tiene poca potencia; se reporta con
@@ -21,6 +27,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
+import statsmodels.formula.api as smf
 from scipy.stats import norm, wilcoxon
 
 RESULTS_DIR = Path(__file__).resolve().parent.parent / "results" / "tables"
@@ -60,6 +67,23 @@ def main():
         reg_rows.append(dict(model=model, slope=slope, p_value=p_value, r2=fit.rsquared))
         print(f"{model:22s} pendiente={slope:+.5f}  p={p_value:.4f}  R²={fit.rsquared:.3f}")
     pd.DataFrame(reg_rows).to_csv(RESULTS_DIR / "regresion_degradacion.csv", index=False)
+
+    # --- ANCOVA: F1 ~ distancia + modelo (efecto fijo) ---
+    # La regresion pooled de arriba ("__combinado__") mete en el residuo
+    # la diferencia fija de F1 base entre modelos (logistica ~1 punto
+    # por debajo de los dos ensembles de arboles), lo que infla esa
+    # varianza residual y subestima la significancia de la pendiente
+    # real de interes. Controlar por modelo como efecto fijo la saca
+    # del residuo; con diseno balanceado (5 distancias x 3 modelos) la
+    # pendiente no cambia, pero su p-valor sí.
+    ancova_fit = smf.ols("f1 ~ distance + C(model)", data=fija).fit()
+    ancova_slope = ancova_fit.params["distance"]
+    ancova_p = ancova_fit.pvalues["distance"]
+    print(f"\n=== ANCOVA F1 ~ distancia + modelo (efecto fijo) ===")
+    print(f"pendiente={ancova_slope:+.5f}  p={ancova_p:.4f}  R²={ancova_fit.rsquared:.3f}")
+    pd.DataFrame([dict(slope=ancova_slope, p_value=ancova_p, r2=ancova_fit.rsquared)]).to_csv(
+        RESULTS_DIR / "ancova_degradacion.csv", index=False
+    )
 
     # --- Prueba de Page: tendencia monotona decreciente ---
     pivot = fija.pivot(index="model", columns="distance", values="f1").loc[models]
