@@ -99,3 +99,24 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 - Bloqueado en: nada.
 - Siguiente: revisión adversarial ronda 1 (rol de revisor de la revista destino).
 - Tiempo de computo consumido: ~15 min
+
+
+## 20/08 - Juan — Revisión adversarial ronda 1 (rol JJCIT) + bibliografía ampliada + figuras
+- Hecho: bibliografía ampliada de 2 a 6 citas verificadas (concept drift survey, Tranco, Random Forest, XGBoost). Revisión adversarial: se detectó que las 4 figuras existían como archivos pero nunca estaban insertadas en el manuscrito -- corregido, incluyendo dos figuras de mecanismo (desplazamiento de features y su importancia por bloque) que antes no se mencionaban en el texto y que refuerzan directamente el argumento de la Discusión. Se detectó una debilidad estadística real: la regresión "pooled" de F1 sobre distancia temporal mezclaba, sin controlarlo, las diferencias fijas de F1 base entre los 3 modelos con la tendencia real que se quería medir. Se recalculó como ANCOVA controlando por modelo: la pendiente no cambia, pero la significancia mejora sustancialmente (p=0.022 → p=0.0048, R²=0.34 → 0.69). Se reescribió abstract, metodología, resultados y discusión con esto. Pasada anti-IA parcial (frases repetidas entre los 5 artículos, ej. "central, if unglamorous, finding").
+- Bloqueado en: nada.
+- Siguiente: ronda 2 de revisión adversarial + pasada anti-IA completa.
+- Tiempo de computo consumido: ~30 min
+
+
+## 20/08 - Juan — Ronda 2 + pasada anti-IA + auditoría numérica
+- Hecho: se verificó cada número de las tablas del manuscrito contra `results/tables/comparacion_estrategias.csv` y `diferencia_aleatoria_vs_temporal.csv` uno por uno -- todos coinciden exactamente. Segunda lectura crítica del texto completo. Pasada anti-IA: se reescribieron frases repetidas con otros artículos de la línea ("central, if unglamorous, finding", "reframes the practical recommendation", "is itself informative").
+- Bloqueado en: nada.
+- Siguiente: continuar con Fase 2 restante para los demás artículos si aplica.
+- Tiempo de computo consumido: ~10 min
+
+
+## 21/08 - Juan — Auditoría completa contra las 2 fichas guía + conversión a Word
+- Hecho: releí las dos fichas fuente completas (no solo memoria) y comparé línea por línea contra los 5 manuscritos. Encontré que **P8/JJCIT sí exige plantilla Word** (se me había pasado en una nota anterior que decía "P2, P6, P9") -- generado `paper/P8_JJCIT_manuscript.docx`, verificado abriéndolo en Word real y exportando a PDF: tabla, las 4 figuras y referencias correctas. También se detectó que faltan 2 de las 3 tablas que la ficha pide (Tabla 1: características extraídas con definición; Tabla 2: F1 por bloque y modelo) -- solo está la Tabla 3 (comparación aleatoria vs. temporal). Pendiente para más adelante.
+- Bloqueado en: nada.
+- Siguiente: agregar las 2 tablas faltantes.
+- Tiempo de computo consumido: ~15 min
