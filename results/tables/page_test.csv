@@ -1,2 +1,2 @@
-L,Z,p_one_sided,n_judges,n_conditions
-112.0,-2.6558112382722783,0.0039558943403557294,3,5
+L,Z,p_asintotico,p_permutacion,n_permutaciones,n_judges,n_conditions
+112.0,-2.6558112382722783,0.0039558943403557294,0.00255,100000,3,5

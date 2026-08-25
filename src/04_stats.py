@@ -51,6 +51,42 @@ def page_l_test(matrix: np.ndarray):
     return L, Z, p_one_sided
 
 
+def page_l_from_ranks(ranks: np.ndarray) -> float:
+    """L a partir de una matriz de rangos ya calculada (para reusar en
+    la permutacion sin recalcular rangos en cada iteracion)."""
+    n_judges, k = ranks.shape
+    R_j = ranks.sum(axis=0)
+    j = np.arange(1, k + 1)
+    return float(np.sum(j * R_j))
+
+
+def page_l_permutation_test(matrix: np.ndarray, n_perm: int = 100_000, seed: int = 42):
+    """Prueba de Page exacta por permutacion Monte Carlo (revision
+    adversarial ronda 2: con solo 3 jueces la aproximacion normal
+    asintotica del test de Page, ya sennalada como de poca potencia en
+    el comentario de page_l_test, no es del todo confiable). Bajo H0
+    cada juez (modelo) ordena las k condiciones de forma intercambiable
+    -- se permutan independientemente los rangos de cada juez n_perm
+    veces y se compara el L observado contra esa distribucion nula
+    exacta (hasta error de muestreo Monte Carlo), en vez de la
+    aproximacion normal. H1 = tendencia decreciente -> L observado
+    deberia caer en la cola IZQUIERDA (valores pequennos de L) de la
+    nula bajo H0."""
+    n_judges, k = matrix.shape
+    ranks = np.array([pd.Series(row).rank().values for row in matrix])
+    L_obs = page_l_from_ranks(ranks)
+
+    rng = np.random.RandomState(seed)
+    null_L = np.empty(n_perm)
+    base = np.arange(k)
+    for i in range(n_perm):
+        permuted = np.array([ranks[r, rng.permutation(base)] for r in range(n_judges)])
+        null_L[i] = page_l_from_ranks(permuted)
+
+    p_perm = (null_L <= L_obs).mean()  # cola izquierda: L pequenno = tendencia decreciente fuerte
+    return L_obs, p_perm, null_L
+
+
 def main():
     df = pd.read_csv(RESULTS_DIR / "degradation_long.csv")
     models = sorted(df["model"].unique())
@@ -91,9 +127,17 @@ def main():
     print(f"\n=== Prueba de Page (tendencia monótona decreciente) ===")
     print(f"L={L:.1f}  Z={Z:.3f}  p (unilateral, decreciente)={p_one_sided:.4f}")
     print("Nota: solo 3 jueces (modelos) -> la aproximación normal tiene poca potencia; interpretar con cautela.")
-    pd.DataFrame([dict(L=L, Z=Z, p_one_sided=p_one_sided, n_judges=len(models), n_conditions=pivot.shape[1])]).to_csv(
-        RESULTS_DIR / "page_test.csv", index=False
-    )
+
+    # --- Robustez: prueba de Page exacta por permutacion (revision
+    # adversarial ronda 2, responde directamente a la nota de arriba) ---
+    L_obs, p_perm, null_L = page_l_permutation_test(pivot.values, n_perm=100_000)
+    print(f"\n=== Prueba de Page, robustez por permutación Monte Carlo (100,000 iteraciones) ===")
+    print(f"L observado={L_obs:.1f}  p (permutación, unilateral, decreciente)={p_perm:.5f}")
+    print(f"(comparar con p asintótico normal={p_one_sided:.4f} arriba)")
+    pd.DataFrame([dict(
+        L=L, Z=Z, p_asintotico=p_one_sided, p_permutacion=p_perm, n_permutaciones=100_000,
+        n_judges=len(models), n_conditions=pivot.shape[1],
+    )]).to_csv(RESULTS_DIR / "page_test.csv", index=False)
 
     # --- Comparacion de estrategias: ventana vs acumulativa ---
     print("\n=== Comparación de estrategias (ventana vs. acumulativa) ===")
