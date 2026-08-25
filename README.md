@@ -9,14 +9,16 @@
 - [x] Experimento ejecutado (día 1) — 4 estrategias × 3 modelos
 - [x] Estadística (día 1) — regresión, prueba de Page, comparación de estrategias
 - [x] Figuras generadas (4/4)
-- [ ] Redacción del manuscrito (día 2)
+- [x] Redacción del manuscrito (día 2) — `paper/main.tex` completo
 - [x] Endurecimiento: DOIs verificados
-- [ ] Endurecimiento: revisión adversarial ronda 1
-- [ ] Endurecimiento: revisión adversarial ronda 2
-- [ ] Revisión cruzada
-- [ ] Repositorio en GitHub
+- [x] Endurecimiento: revisión adversarial ronda 1
+- [x] Endurecimiento: revisión adversarial ronda 2 (correcciones reales aplicadas, no solo notas de limitación)
+- [x] Endurecimiento: auditoría de reproducibilidad (cada número citado verificado contra results/tables/ y src/)
+- [x] Word/PDF sincronizados y verificados palabra por palabra contra main.tex
+- [ ] Revisión cruzada (2 sep, la hace el otro practicante)
+- [ ] Repositorio en GitHub (repo local únicamente por ahora)
 - [ ] Publicado en Zenodo (DOI)
-- [ ] Carta de presentación y declaraciones
+- [x] Carta de presentación y declaraciones (borrador en `paper/cover_letter.md` y `paper/declaraciones.md`)
 - [ ] Entregado al responsable académico
 
 ## Protocolo
