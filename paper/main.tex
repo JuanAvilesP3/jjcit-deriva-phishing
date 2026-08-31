@@ -1,20 +1,48 @@
-\documentclass[10pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{booktabs}
-\usepackage{graphicx}
+\documentclass[11pt,twoside]{articleJJCIT}
 \usepackage{amsmath}
-\usepackage[numbers,sort&compress]{natbib}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{times}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\usepackage[paperheight=11.69in,paperwidth=8.27in,left=0.98in,right=0.98in,top=0.98in,bottom=0.59in,headheight=1in]{geometry}
+\usepackage[utf8]{inputenc}
 
-\title{Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation}
-\author{}
-\date{}
+\DeclareCaptionLabelSeparator{period}{. }
+\captionsetup{labelsep=period}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\thepage \quad {\fontsize{8pt}{11pt}\selectfont "Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation", Author Name.}}
+\fancyhead[LO]{{\fontsize{8pt}{11pt}\selectfont Jordanian Journal of Computers and Information Technology (JJCIT), Vol. 12, No. X, 2026.}}
+\renewcommand{\headrulewidth}{0pt}
+
+\providecommand{\citep}[1]{\cite{#1}}
+\providecommand{\citet}[1]{\cite{#1}}
 
 \begin{document}
+
+\title{\fontsize{20pt}{22pt}\selectfont \textbf{CONCEPT DRIFT IN URL-BASED PHISHING DETECTION: A TEMPORAL EVALUATION}}
+\setlength{\parskip}{12.0pt}\par
+
+\author{Author Name\footnote{Author Name is with the Department of Informatics, Institution Name, City, Country. E-mail: author@email.edu}}
 \maketitle
 
-\begin{abstract}
-Phishing detectors are almost universally evaluated with random train/test splits, which implicitly assume that a URL's characteristics are exchangeable across time. We test that assumption by training three lexical-feature classifiers (random forest, XGBoost, logistic regression) on 180 days of PhishTank-reported phishing URLs plus a matched sample of legitimate domains, and evaluating them under four temporal designs: a random split (the field's default), training on the earliest block and testing on each subsequent block, a sliding retraining window, and cumulative retraining. All three models achieve F1 above 0.98 in every configuration, and the gap between the random-split baseline and the worst temporally-displaced block is small in absolute terms (0.36 to 0.92 percentage points of F1, model-dependent). A regression of F1 on temporal distance is significant when pooled across models, and its precision improves substantially once model-level baseline differences are controlled for ($p=0.022$ naive, $p=0.0048$ controlling for model as a fixed effect); a Page test for a monotonic decreasing trend across the three models as judges agrees ($Z=-2.66$, $p=0.004$). We argue the near-ceiling performance points partly to a design choice rather than a solved problem: removing the four features most associated with how the legitimate class was constructed (\texttt{is\_https}, \texttt{path\_length}, \texttt{num\_slashes}, \texttt{url\_length}) drops F1 by 3.3 to 4.1 percentage points across models, confirming that the choice of negative class (well-established top-ranked domains) inflates the reported ceiling; the remaining 28 features still achieve F1 of 0.95--0.96, so most of the separability reflects genuine lexical structure in phishing URLs rather than an artifact of URL construction alone.
-\end{abstract}
+{\fontsize{13pt}{11pt} \textit{\textbf{ABSTRACT}}}\par
+\setlength{\parskip}{6.0pt}
+\fontsize{10pt}{12.0pt}\selectfont 
+{\textit{Phishing detectors are almost universally evaluated with random train/test splits, which implicitly assume that a URL's characteristics are exchangeable across time. We test that assumption by training three lexical-feature classifiers (random forest, XGBoost, logistic regression) on 180 days of PhishTank-reported phishing URLs plus a matched sample of legitimate domains, and evaluating them under four temporal designs: a random split (the field's default), training on the earliest block and testing on each subsequent block, a sliding retraining window, and cumulative retraining. All three models achieve F1 above 0.98 in every configuration, and the gap between the random-split baseline and the worst temporally-displaced block is small in absolute terms (0.36 to 0.92 percentage points of F1, model-dependent). A regression of F1 on temporal distance is significant when pooled across models, and its precision improves substantially once model-level baseline differences are controlled for ($p=0.022$ naive, $p=0.0048$ controlling for model as a fixed effect); a Page test for a monotonic decreasing trend across the three models as judges agrees ($Z=-2.66$, $p=0.004$). We argue the near-ceiling performance points partly to a design choice rather than a solved problem: removing the four features most associated with how the legitimate class was constructed (\texttt{is\_https}, \texttt{path\_length}, \texttt{num\_slashes}, \texttt{url\_length}) drops F1 by 3.3 to 4.1 percentage points across models, confirming that the choice of negative class (well-established top-ranked domains) inflates the reported ceiling; the remaining 28 features still achieve F1 of 0.95--0.96, so most of the separability reflects genuine lexical structure in phishing URLs rather than an artifact of URL construction alone.}}\par
+
+\vspace{6pt}
+{\fontsize{13pt}{10pt} \textit{\textbf{KEYWORDS}}}\par
+\setlength{\parskip}{12.0pt}
+{\textit{Phishing detection, Concept drift, Temporal evaluation, Adversarial machine learning, Lexical features, Cybersecurity.}}\par
 
 \section{Introduction}
 

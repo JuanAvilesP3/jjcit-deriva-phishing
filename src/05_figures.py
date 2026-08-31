@@ -32,40 +32,38 @@ SEED = 42
 
 KEY_FEATURES = ["url_length", "num_suspicious_keywords", "url_entropy", "has_ip_address"]
 MODEL_COLORS = {"random_forest": COLORS["primary"], "xgboost": COLORS["secondary"], "logistic_regression": COLORS["neutral"]}
-MODEL_LABELS = {"random_forest": "Random Forest", "xgboost": "XGBoost", "logistic_regression": "Regresión Logística"}
+MODEL_LABELS = {"random_forest": "Random Forest", "xgboost": "XGBoost", "logistic_regression": "Logistic Regression"}
 
 
 def fig1_curva_degradacion(df):
     fija = df[df.strategy == "fija"]
     aleatoria = df[df.strategy == "aleatoria"].set_index("model")["f1"]
 
-    fig, ax = plt.subplots(figsize=(8, 5.5))
+    fig, ax = plt.subplots(figsize=(7.5, 5))
     for model in fija["model"].unique():
         sub = fija[fija.model == model].sort_values("distance")
         ax.plot(sub["distance"], sub["f1"], marker="o", color=MODEL_COLORS[model], label=MODEL_LABELS[model])
         ax.axhline(aleatoria[model], color=MODEL_COLORS[model], linestyle="--", linewidth=1, alpha=0.6)
 
-    ax.set_xlabel("Distancia temporal al bloque de entrenamiento (bloques)")
-    ax.set_ylabel("F1")
-    ax.set_title("Fig. 1 — Degradación de F1 con la distancia temporal\n(líneas punteadas = partición aleatoria, referencia)")
+    ax.set_xlabel("Temporal distance to training block (blocks)")
+    ax.set_ylabel("F1 Score")
     ax.legend(fontsize=9)
     save_figure(fig, FIG_DIR / "fig1_curva_degradacion")
     plt.close(fig)
 
 
 def fig2_estrategias(df):
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(14, 4.5), sharey=True)
     for ax, model in zip(axes, MODEL_LABELS):
-        for strategy, color, marker in [("ventana", COLORS["secondary"], "s"), ("acumulativa", COLORS["primary"], "o")]:
+        for strategy, color, marker, strat_label in [("ventana", COLORS["secondary"], "s", "Sliding window"), ("acumulativa", COLORS["primary"], "o", "Cumulative retraining")]:
             sub = df[(df.model == model) & (df.strategy == strategy)].copy()
             sub["eval_block"] = sub["eval_block"].astype(int)
             sub = sub.sort_values("eval_block")
-            ax.plot(sub["eval_block"], sub["f1"], marker=marker, color=color, label=strategy)
-        ax.set_title(MODEL_LABELS[model], fontsize=10)
-        ax.set_xlabel("Bloque evaluado")
-    axes[0].set_ylabel("F1")
-    axes[0].legend(fontsize=9)
-    fig.suptitle("Fig. 2 — Ventana deslizante vs. reentrenamiento acumulativo", fontsize=12)
+            ax.plot(sub["eval_block"], sub["f1"], marker=marker, color=color, label=strat_label)
+        ax.set_title(MODEL_LABELS[model], fontsize=9.5)
+        ax.set_xlabel("Evaluated block")
+    axes[0].set_ylabel("F1 Score")
+    axes[0].legend(fontsize=8.5)
     save_figure(fig, FIG_DIR / "fig2_comparacion_estrategias")
     plt.close(fig)
 
@@ -79,15 +77,14 @@ def fig3_desplazamiento_features(dataset):
     first_block = phishing[phishing.block == 0]
     last_block = phishing[phishing.block == n_blocks - 1]
 
-    fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+    fig, axes = plt.subplots(2, 2, figsize=(9, 7))
     for ax, feat in zip(axes.flat, KEY_FEATURES):
-        ax.hist(first_block[feat], bins=30, alpha=0.55, color=COLORS["secondary"], density=True, label="Bloque 1 (más antiguo)")
-        ax.hist(last_block[feat], bins=30, alpha=0.55, color=COLORS["primary"], density=True, label=f"Bloque {n_blocks} (más reciente)")
-        ax.set_title(feat, fontsize=10)
-        ax.set_ylabel("Densidad")
+        ax.hist(first_block[feat], bins=30, alpha=0.55, color=COLORS["secondary"], density=True, label="Block 1 (earliest)")
+        ax.hist(last_block[feat], bins=30, alpha=0.55, color=COLORS["primary"], density=True, label=f"Block {n_blocks} (latest)")
+        ax.set_title(feat, fontsize=9.5)
+        ax.set_ylabel("Density")
 
     axes[0, 0].legend(fontsize=8)
-    fig.suptitle("Fig. 3 — Desplazamiento de características clave (solo phishing)\nprimer vs. último bloque temporal", fontsize=12)
     save_figure(fig, FIG_DIR / "fig3_desplazamiento_features")
     plt.close(fig)
 
@@ -108,21 +105,20 @@ def fig4_importancia_por_bloque(dataset):
         y = sub["label"]
         model = RandomForestClassifier(n_estimators=150, max_depth=12, random_state=SEED, n_jobs=-1)
         model.fit(X, y)
-        importances[f"bloque {b + 1}"] = model.feature_importances_
+        importances[f"Block {b + 1}"] = model.feature_importances_
 
     top_features = importances.mean(axis=1).nlargest(10).index
     top = importances.loc[top_features]
 
-    fig, ax = plt.subplots(figsize=(9, 6))
+    fig, ax = plt.subplots(figsize=(8.5, 5.5))
     im = ax.pcolormesh(top.values, cmap="Blues", edgecolors="white", linewidth=0.5)
     ax.set_yticks(np.arange(len(top_features)) + 0.5)
     ax.set_yticklabels(top_features, fontsize=8)
     ax.set_xticks(np.arange(n_blocks) + 0.5)
     ax.set_xticklabels(top.columns, fontsize=8)
     ax.invert_yaxis()
-    ax.grid(False)  # el grid global cae en el centro de cada celda (ticks ahi para las etiquetas)
-    fig.colorbar(im, ax=ax, label="Importancia (Random Forest)")
-    ax.set_title("Fig. 4 — Importancia de características por bloque temporal")
+    ax.grid(False)
+    fig.colorbar(im, ax=ax, label="Feature Importance (Random Forest)")
     save_figure(fig, FIG_DIR / "fig4_importancia_por_bloque")
     plt.close(fig)
 
