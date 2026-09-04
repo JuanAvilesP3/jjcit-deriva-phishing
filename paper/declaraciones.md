@@ -1,22 +1,22 @@
-# Declaraciones Éticas y Editoriales (JJCIT)
+# Ethical and Editorial Declarations (JJCIT)
 
-## 1. Declaración sobre el uso de Inteligencia Artificial Generativa y Tecnologías Asistidas por IA
-Los autores declaran que durante la preparación y redacción de este manuscrito se utilizaron herramientas de inteligencia artificial generativa exclusivamente como apoyo técnico para la asistencia gramatical, traducción académica al inglés y estructuración del formato en LaTeX. La conceptualización científica, el diseño experimental de partición temporal, la descarga y curación de datos de PhishTank y Tranco, la extracción de las 32 características léxicas, los modelos de aprendizaje automático, las pruebas estadísticas (ANCOVA y prueba de Page) y la interpretación de los resultados fueron realizados bajo la dirección, ejecución y supervisión total de los autores humanos, quienes asumen la responsabilidad íntegra del manuscrito.
+## 1. Disclosure of Generative AI and AI-Assisted Technologies
+The authors declare that during the preparation of this manuscript, generative AI and language-support tools were utilized solely for grammatical proofreading, academic language refinement, and LaTeX formatting. All scientific conceptualization, temporal experimental designs, PhishTank and Tranco data curation, feature extraction, model implementations, statistical testing (ANCOVA and exact Page permutation tests), and interpretations were conceived, conducted, and supervised entirely by the human authors, who assume full intellectual and ethical responsibility for the work.
 
-## 2. Disponibilidad de Datos y Código (Data and Code Availability)
-El dataset procesado con marcas temporales (29,299 URLs de phishing de PhishTank y 29,299 URLs legítimas de Tranco), las tablas con los resultados de las 4 estrategias temporales y el pipeline completo de scripts en Python (`01_download.py` a `05_figures.py`) están organizados para su total reproducibilidad y serán depositados en un repositorio público abierto con asignación de DOI en Zenodo tras la aceptación del artículo.
+## 2. Data and Code Availability
+The curated dataset with timestamps (29,299 PhishTank phishing URLs and 29,299 Tranco legitimate domains), extracted feature matrices, experimental scripts (`01_download.py` through `05_figures.py`), and result tables are structured for full reproducibility and will be deposited in an open-access Zenodo repository upon publication.
 
-## 3. Contribuciones de Autoría (CRediT — Contributor Roles Taxonomy)
-- **Conceptualización:** Autor Principal.
-- **Metodología y Diseño Temporal:** Autor Principal.
-- **Software y Pipeline de Extracción:** Autor Principal.
-- **Validación y Análisis Estadístico:** Autor Principal.
-- **Investigación y Curación de Datos:** Autor Principal.
-- **Redacción — Borrador Original:** Autor Principal.
-- **Redacción — Revisión y Edición:** Autor Principal.
+## 3. Contributor Roles Taxonomy (CRediT)
+- **Conceptualization:** Primary Author.
+- **Methodology & Temporal Design:** Primary Author.
+- **Software & Feature Extraction Pipeline:** Primary Author.
+- **Validation & Statistical Analysis:** Primary Author.
+- **Investigation & Data Curation:** Primary Author.
+- **Writing – Original Draft:** Primary Author.
+- **Writing – Review & Editing:** Primary Author.
 
-## 4. Conflicto de Intereses (Conflict of Interest)
-Los autores declaran que no existe ningún conflicto de interés financiero, institucional, profesional o personal que pudiera haber influido en la investigación reportada en este manuscrito.
+## 4. Conflict of Interest
+The authors declare that they have no competing financial, personal, or institutional interests that could have influenced the research reported in this manuscript.
 
-## 5. Financiamiento (Funding)
-Esta investigación fue realizada con recursos propios institucionales y no recibió subvenciones específicas de organismos públicos o comerciales.
+## 5. Funding
+This research received no external grant funding from any public or commercial agency; all resources were provided by institutional and personal means.

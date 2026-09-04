@@ -118,6 +118,13 @@ def fig4_importancia_por_bloque(dataset):
     ax.set_xticklabels(top.columns, fontsize=8)
     ax.invert_yaxis()
     ax.grid(False)
+    
+    for i in range(len(top_features)):
+        for j in range(n_blocks):
+            val = top.values[i, j]
+            color = "white" if val > top.values.max() / 2 else "black"
+            ax.text(j + 0.5, i + 0.5, f"{val:.3f}", ha="center", va="center", color=color, fontsize=7)
+
     fig.colorbar(im, ax=ax, label="Feature Importance (Random Forest)")
     save_figure(fig, FIG_DIR / "fig4_importancia_por_bloque")
     plt.close(fig)

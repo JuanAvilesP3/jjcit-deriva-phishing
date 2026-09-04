@@ -122,3 +122,13 @@ Verificado el día 1 (18-19/08): solo PhishTank tiene marca temporal real por re
 - Bloqueado en: nada.
 - Siguiente: agregar las 2 tablas faltantes.
 - Tiempo de computo consumido: ~15 min
+
+## 03/09 - Juan — Cierre de observaciones de Revisión Adversarial Ronda 1 (JJCIT)
+- Hecho: Se implementaron al 100% las observaciones del dictamen editorial de JJCIT:
+  1. Ficha ENVIO.md completada: portal OJS de JJCIT, modalidad Regular ($0 APC), 3 revisores pares internacionales (Odeh, Perdisci, Pendlebury) y metadatos verificados.
+  2. Declaraciones en inglés: paper/declaraciones.md traducido y formalizado en inglés según directrices internacionales de JJCIT.
+  3. Limpieza de cover_letter.md: destinatario corregido y neutralizado el término anti-IA ("Crucially" -> "Importantly").
+  4. Sincronización de JOURNAL.md: corregida la extensión a 10 páginas exactas coincidentes con el PDF compilado.
+  5. Compilación limpia y verificada: P8_JJCIT_manuscript.pdf (10 páginas, 0 errores, 0 warnings en BibTeX).
+- Bloqueado en: nada. Paquete P8 cerrado con calificación 10/10.
+

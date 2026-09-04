@@ -1,8 +1,7 @@
 # Cover Letter — Jordanian Journal of Computers and Information Technology (JJCIT)
 
 **To:**  
-Prof. Dr. Editorial Board  
-Editors-in-Chief, *Jordanian Journal of Computers and Information Technology* (JJCIT)  
+Editors-in-Chief and Editorial Board, *Jordanian Journal of Computers and Information Technology* (JJCIT)  
 
 **Date:** August 27, 2026  
 **Subject:** Submission of original research paper: *"Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation"*  
@@ -15,7 +14,7 @@ We are pleased to submit our original research manuscript titled **"Concept Drif
 
 In this work, we rigorously evaluate a critical methodological gap in the literature: the ubiquitous practice of evaluating URL phishing classifiers using standard random train/test splits, which fundamentally assumes data stationarity and ignores adversarial concept drift. Using a curated dataset of **58,598 URLs** (**29,299 real phishing URLs** collected continuously from PhishTank over **180 days** with unauthenticated timestamps, paired with **29,299 legitimate domains** from the Tranco research list), we extract 32 lexical features and benchmark three classifier families (Random Forest, XGBoost, and Logistic Regression) under four distinct evaluation protocols: random split baseline, fixed earliest-to-latest temporal blocks, sliding retraining windows, and cumulative retraining. 
 
-Our statistical analysis confirms a statistically significant performance degradation trend across time using an ANCOVA specification controlling for model fixed effects ($p = 0.0048$) and a non-parametric Page test ($Z = -2.66$, $p = 0.004$). Crucially, our feature ablation demonstrates that near-ceiling laboratory performance in published literature is heavily driven by negative-class construction choices (such as domain-level vs. path-level lexical artifacts), providing concrete recommendations for robust, temporal evaluation protocols in real-world security operations.
+Our statistical analysis confirms a statistically significant performance degradation trend across time using an ANCOVA specification controlling for model fixed effects ($p = 0.0048$) and a non-parametric Page test ($Z = -2.66$, $p = 0.004$). Importantly, our feature ablation demonstrates that near-ceiling laboratory performance in published literature is heavily driven by negative-class construction choices (such as domain-level vs. path-level lexical artifacts), providing concrete recommendations for robust, temporal evaluation protocols in real-world security operations.
 
 We confirm that:
 1. This manuscript represents original research, has not been published previously, and is not currently under consideration for publication elsewhere.
