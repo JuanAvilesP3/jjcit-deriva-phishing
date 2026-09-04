@@ -13,7 +13,7 @@
 
 % verificado 20/08/2026
 @article{gama2014survey,
-  author  = {Gama, Jo\~{a}o and \v{Z}liobait\.{e}, Indr\.{e} and Bifet, Albert and Pechenizkiy, Mykola and Bouchachia, Abdelhamid},
+  author  = {Gama, Joao and \v{Z}liobait\.{e}, Indr\.{e} and Bifet, Albert and Pechenizkiy, Mykola and Bouchachia, Abdelhamid},
   title   = {A Survey on Concept Drift Adaptation},
   journal = {ACM Computing Surveys},
   year    = {2014},
@@ -66,9 +66,9 @@
   year    = {2024},
   volume  = {10},
   number  = {2},
-  pages   = {729--746},
-  doi     = {10.5455/jjcit.71-1707074358},
-  note    = {[Online], Available: \url{https://doi.org/10.5455/jjcit.71-1707074358}}
+  pages   = {123--137},
+  doi     = {10.5455/jjcit.71-1694806966},
+  note    = {[Online], Available: \url{https://doi.org/10.5455/jjcit.71-1694806966}}
 }
 
 % verificado 24/08/2026, usenix.org/conference/usenixsecurity19/presentation/pendlebury -- URL resuelve (sin DOI, tipico de actas USENIX)
@@ -78,6 +78,7 @@
   booktitle = {Proceedings of the 28th USENIX Security Symposium},
   year      = {2019},
   pages     = {729--746},
+  url       = {https://www.usenix.org/conference/usenixsecurity19/presentation/pendlebury},
   note      = {[Online], Available: \url{https://www.usenix.org/conference/usenixsecurity19/presentation/pendlebury}}
 }
 
@@ -154,11 +155,11 @@
 % verificado 01/09/2026, DOI 10.1109/COMST.2015.2494502 ? Buczak; Guven 2016 ? TITULO CORRECTO
 % "A Survey of Data Mining and ML Methods for Cyber Security Intrusion Detection"
 % IEEE Communications Surveys & Tutorials, vol. 18, no. 2, pp. 1153-1176, 2016.
-% Revision sistemática de métodos de ML para detección de intrusiones y ciberseguridad;
-% documenta que concept drift es uno de los cinco desafíos centrales para el despliegue
-% real de clasificadores de seguridad, y que ninguna solución propuesta entre 2000-2014
-% abordaba simultáneamente el desequilibrio de clases y la deriva temporal -- posiciona
-% directamente el problema que este artículo aborda en el dominio específico de phishing.
+% Revision sistemtica de mtodos de ML para deteccin de intrusiones y ciberseguridad;
+% documenta que concept drift es uno de los cinco desafos centrales para el despliegue
+% real de clasificadores de seguridad, y que ninguna solucin propuesta entre 2000-2014
+% abordaba simultneamente el desequilibrio de clases y la deriva temporal -- posiciona
+% directamente el problema que este artculo aborda en el dominio especfico de phishing.
 @article{buczak2016survey,
   author  = {Buczak, Anna L. and Guven, Erhan},
   title   = {A Survey of Data Mining and Machine Learning Methods for Cyber Security Intrusion Detection},
@@ -169,4 +170,126 @@
   pages   = {1153--1176},
   doi     = {10.1109/COMST.2015.2494502},
   note    = {[Online], Available: \url{https://doi.org/10.1109/COMST.2015.2494502}}
+}
+
+% verificado 02/09/2026, DOI 10.1049/iet-ifs.2013.0202 resuelve en Crossref:
+% Mohammad, R. M., Thabtah, F., McCluskey, L. -- "Intelligent rule-based phishing websites classification"
+% IET Information Security, vol. 8, no. 3, pp. 153-160, 2014.
+% Introduce un sistema basado en reglas para clasificacion de sitios phishing
+% usando rasgos de URL y pagina; antecedente directo del enfoque lexico puro
+% que este articulo evalua bajo desplazamiento temporal.
+@article{mohammad2014phishing,
+  author  = {Mohammad, Rami M. and Thabtah, Fadi and McCluskey, Lee},
+  title   = {Intelligent Rule-Based Phishing Websites Classification},
+  journal = {IET Information Security},
+  year    = {2014},
+  volume  = {8},
+  number  = {3},
+  pages   = {153--160},
+  doi     = {10.1049/iet-ifs.2013.0202},
+  note    = {[Online], Available: \url{https://doi.org/10.1049/iet-ifs.2013.0202}}
+}
+
+% verificado 02/09/2026, DOI 10.1007/s00521-013-1490-z resuelve en Crossref:
+% Mohammad, R. M., Thabtah, F., McCluskey, L. -- "Predicting phishing websites based on self-structuring neural network"
+% Neural Computing and Applications, vol. 25, no. 2, pp. 443-458, 2014.
+% Emplea redes neuronales auto-estructurantes sobre rasgos lexicos de URL similares
+% a los 32 empleados en este estudio; su evaluacion con particion aleatoria es
+% representativa del protocolo que este articulo cuestiona.
+@article{mohammad2013neural,
+  author  = {Mohammad, Rami M. and Thabtah, Fadi and McCluskey, Lee},
+  title   = {Predicting Phishing Websites Based on Self-Structuring Neural Network},
+  journal = {Neural Computing and Applications},
+  year    = {2014},
+  volume  = {25},
+  number  = {2},
+  pages   = {443--458},
+  doi     = {10.1007/s00521-013-1490-z},
+  note    = {[Online], Available: \url{https://doi.org/10.1007/s00521-013-1490-z}}
+}
+
+% verificado 02/09/2026, DOI 10.1002/sec.1674 resuelve en Crossref:
+% Varshney, G., Misra, M., Atrey, P. K. -- "A survey and classification of web phishing detection schemes"
+% Security and Communication Networks, vol. 9, no. 18, pp. 6266-6284, 2016.
+% Revision sistematica de esquemas de deteccion de phishing web que clasifica
+% los enfoques por tipo de rasgo (visual, lexico, basado en contenido, basado
+% en red); situa el enfoque exclusivamente lexico de este articulo dentro de
+% la taxonomia mas amplia del campo.
+@article{varshney2016phishing,
+  author  = {Varshney, Gaurav and Misra, Manoj and Atrey, Pradeep K.},
+  title   = {A Survey and Classification of Web Phishing Detection Schemes},
+  journal = {Security and Communication Networks},
+  year    = {2016},
+  volume  = {9},
+  number  = {18},
+  pages   = {6266--6284},
+  doi     = {10.1002/sec.1674},
+  note    = {[Online], Available: \url{https://doi.org/10.1002/sec.1674}}
+}
+
+% verificado 02/09/2026, DOI 10.1016/j.engappai.2021.104347 resuelve en Crossref:
+% Hannousse, A., Yahiouche, S. -- "Towards benchmark datasets for machine learning based website phishing detection: An experimental study"
+% Engineering Applications of Artificial Intelligence, vol. 104, 104347, 2021.
+% Construye y evalua datasets de referencia para deteccion de phishing basada
+% en ML, documentando que la composicion del dataset (en particular la clase
+% negativa) afecta sistematicamente las metricas reportadas -- hallazgo
+% directamente alineado con nuestra observacion sobre el efecto de Tranco.
+@article{hannousse2021benchmark,
+  author  = {Hannousse, Abdelhakim and Yahiouche, Salima},
+  title   = {Towards Benchmark Datasets for Machine Learning Based Website Phishing Detection: An Experimental Study},
+  journal = {Engineering Applications of Artificial Intelligence},
+  year    = {2021},
+  volume  = {104},
+  pages   = {104347},
+  doi     = {10.1016/j.engappai.2021.104347},
+  note    = {[Online], Available: \url{https://doi.org/10.1016/j.engappai.2021.104347}}
+}
+
+% verificado 02/09/2026, DOI 10.1007/s12046-020-01392-4 resuelve en Crossref:
+% Somesha, M., Pais, A. R., Rao, R. S., Rathour, V. S. -- "Efficient deep learning techniques for the detection of phishing websites"
+% Sadhana, vol. 45, no. 1, art. 165, 2020.
+% Aplica CNN y LSTM a la deteccion de phishing por URL, demostrando que los
+% modelos de deep learning no superan consistentemente a Random Forest en esta
+% tarea cuando se usan rasgos lexicos comparables -- resultado coherente con
+% nuestro hallazgo de que RF es el mejor modelo en todos los esquemas temporales.
+@article{somesha2020phishing,
+  author  = {Somesha, M. and Pais, Alwyn Roshan and Rao, R. Shanmugha and Rathour, Vikram Singh},
+  title   = {Efficient Deep Learning Techniques for the Detection of Phishing Websites},
+  journal = {S\={a}dhan\={a}},
+  year    = {2020},
+  volume  = {45},
+  number  = {1},
+  pages   = {165},
+  doi     = {10.1007/s12046-020-01392-4},
+  note    = {[Online], Available: \url{https://doi.org/10.1007/s12046-020-01392-4}}
+}
+
+% verificado 02/09/2026, DOI 10.1109/icaccs48705.2020.9074400 resuelve en Crossref:
+% Singh, P., Meenu -- "Phishing Website Detection Based on Machine Learning: A Survey"
+% 2020 6th ICACCS, pp. 398-404, 2020.
+% Revision de metodos de ML para deteccion de phishing por URL que documenta
+% la prevalencia del protocolo de evaluacion con particion aleatoria en la
+% literatura reciente, exactamente el protocolo cuyo sesgo temporal este
+% articulo cuantifica.
+@inproceedings{singh2020phishing,
+  author    = {Singh, Pooja and Meenu},
+  title     = {Phishing Website Detection Based on Machine Learning: A Survey},
+  booktitle = {2020 6th International Conference on Advanced Computing and Communication Systems (ICACCS)},
+  year      = {2020},
+  pages     = {398--404},
+  doi       = {10.1109/icaccs48705.2020.9074400},
+  note      = {[Online], Available: \url{https://doi.org/10.1109/icaccs48705.2020.9074400}}
+}
+
+% verificado 02/09/2026, jjcit.org -- DOI 10.5455/jjcit.71-1629527707
+@article{ashi2021nids,
+  author  = {Ashi, Zein and Aburashed, Laila and Al-Qudah, Mahmoud and Qusef, Abdallah},
+  title   = {Network Intrusion Detection Systems Using Supervised Machine Learning Classification and Dimensionality Reduction Techniques: A Systematic Review},
+  journal = {Jordanian Journal of Computers and Information Technology (JJCIT)},
+  year    = {2021},
+  volume  = {7},
+  number  = {4},
+  pages   = {301--326},
+  doi     = {10.5455/jjcit.71-1629527707},
+  note    = {[Online], Available: \url{https://doi.org/10.5455/jjcit.71-1629527707}}
 }
