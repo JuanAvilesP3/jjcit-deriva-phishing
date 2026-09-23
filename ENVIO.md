@@ -8,7 +8,7 @@
 - **Archivo principal a subir:** [`paper/P8_JJCIT_manuscript.pdf`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.pdf) (10 páginas compiladas con la clase oficial `articleJJCIT.cls`) o [`paper/P8_JJCIT_manuscript.docx`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.docx) según el formato solicitado en el sistema OJS.
 - **Archivos complementarios / Código fuente:**
   1. `paper/cover_letter.md` (Carta de presentación formal al Editor en Jefe).
-  2. `paper/declaraciones.md` (Declaraciones CRediT, COPE de IA, conflictos de interés y disponibilidad de datos en Zenodo).
+  2. `paper/declaraciones.md` (Declaraciones CRediT, COPE de IA, conflictos de interés y disponibilidad de datos en Zenodo: DOI 10.5281/zenodo.22907772).
   3. Paquete ZIP de fuentes LaTeX (`main.tex`, `refs.bib`, `articleJJCIT.cls` y carpeta `figures/`).
 - **Autores en orden:**
   1. **Juan Pablo Aviles-Esparza** (`juan.aviles@espoch.edu.ec`, ESPOCH, ORCID: `0009-0007-0058-8069`).
