@@ -4,7 +4,7 @@
 The authors declare that during the preparation of this manuscript, generative AI and language-support tools were utilized solely for grammatical proofreading, academic language refinement, and LaTeX formatting. All scientific conceptualization, temporal experimental designs, PhishTank and Tranco data curation, feature extraction, model implementations, statistical testing (ANCOVA and exact Page permutation tests), and interpretations were conceived, conducted, and supervised entirely by the human authors, who assume full intellectual and ethical responsibility for the work.
 
 ## 2. Data and Code Availability
-The curated dataset with timestamps (29,299 PhishTank phishing URLs and 29,299 Tranco legitimate domains), extracted feature matrices, experimental scripts (`01_download.py` through `05_figures.py`), and result tables are structured for full reproducibility and will be deposited in an open-access Zenodo repository upon publication.
+The curated dataset with timestamps (29,299 PhishTank phishing URLs and 29,299 Tranco legitimate domains), extracted feature matrices, experimental scripts (`01_download.py` through `05_figures.py`), and result tables are structured for full reproducibility and are openly available on Zenodo (DOI: [10.5281/zenodo.22907772](https://doi.org/10.5281/zenodo.22907772)) and GitHub ([JuanAvilesP3/jjcit-deriva-phishing](https://github.com/JuanAvilesP3/jjcit-deriva-phishing)).
 
 ## 3. Contributor Roles Taxonomy (CRediT)
 - **Conceptualization:** Juan Pablo Aviles-Esparza, Isaac David Torres-Paredes.
