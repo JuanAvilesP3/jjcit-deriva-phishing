@@ -11,8 +11,10 @@
   2. `paper/declaraciones.md` (Declaraciones CRediT, COPE de IA, conflictos de interés y disponibilidad de datos en Zenodo).
   3. Paquete ZIP de fuentes LaTeX (`main.tex`, `refs.bib`, `articleJJCIT.cls` y carpeta `figures/`).
 - **Autores en orden:**
-  - Los campos de autoría, afiliaciones institucionales, correos de contacto y ORCIDs se registran directamente en el formulario OJS.
-- **Autor de correspondencia:** A definir en la cuenta de envío OJS.
+  1. **Juan Pablo Aviles-Esparza** (`juan.aviles@espoch.edu.ec`, ESPOCH, ORCID: `0009-0007-0058-8069`).
+  2. **Italo Javier Tenempaguay-Granizo** (`italo.tenempaguay@espoch.edu.ec`, ESPOCH, ORCID: `0009-0001-5753-4279`).
+  3. **Isaac David Torres-Paredes** (`isaac.torres@espoch.edu.ec`, ESPOCH, ORCID: `0009-0001-7057-9316`).
+- **Autor de correspondencia:** Juan Pablo Aviles-Esparza (`juan.aviles@espoch.edu.ec`).
 - **Palabras clave para el formulario OJS:**
   `Phishing detection`, `Concept drift`, `Temporal evaluation`, `Adversarial machine learning`, `Lexical features`, `Cybersecurity`.
 - **Revisores pares sugeridos (3 expertos internacionales):**
