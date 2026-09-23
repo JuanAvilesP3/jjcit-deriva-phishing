@@ -3,6 +3,7 @@
 - **Revista destino:** *Jordanian Journal of Computers and Information Technology* (JJCIT), Princess Sumaya University for Technology / Scientific Research Support Fund, Jordania.
 - **Indexación:** Scopus (CiteScore 2.5), DOAJ, EBSCO, dblp.
 - **URL del portal de envío (OJS):** [https://jjcit.org/page/instructions_authors](https://jjcit.org/page/instructions_authors)
+- **Modalidad de revisión por pares:** **Simple Ciego (Single-Blind Peer Review)**. Los revisores evalúan de forma anónima, pero tienen acceso a los nombres y filiaciones de los autores en la primera página del manuscrito según la plantilla oficial `articleJJCIT.cls`.
 - **Modalidad de procesamiento:** Regular Research Paper.
 - **Cobra APC?:** **NO ($0 USD)**. Publicación 100% gratuita y de acceso abierto diamante (Diamond Open Access verificado en JOURNAL.md).
 - **Archivo principal a subir:** [`paper/P8_JJCIT_manuscript.pdf`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.pdf) (10 páginas compiladas con la clase oficial `articleJJCIT.cls`) o [`paper/P8_JJCIT_manuscript.docx`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.docx) según el formato solicitado en el sistema OJS.
