@@ -1,18 +1,24 @@
 # Ficha de Instrucciones de Envío — Paper P8
+**Proyecto:** Deriva Conceptual en Detección de Phishing por URL (Evaluación Temporal)  
+**Marco Institucional:** FIE-ESPOCH 2026 (Planificación Oficial de Producción Científica)  
+**Fecha de Actualización:** 28 de septiembre de 2026  
+
+---
 
 ## 1. Identificación de la Revista y Política Editorial
 - **Revista destino:** *Jordanian Journal of Computers and Information Technology* (JJCIT)
 - **Entidad editora:** Princess Sumaya University for Technology (PSUT) / Scientific Research Support Fund (SRSF), Amán, Jordania.
 - **ISSN:** 2415-1076 (En línea) | 2413-9351 (Impreso).
 - **Indexación oficial:** Scopus (CiteScore 2.5), DOAJ, EBSCO, dblp, Google Scholar.
-- **Portal oficial de envíos (OJS):** [https://jjcit.org/page/instructions_authors](https://jjcit.org/page/instructions_authors)
-- **Modalidad de revisión por pares:** **Simple Ciego (Single-Blind Peer Review)**. Los revisores evalúan de manera anónima, pero el manuscrito incluye los nombres y filiaciones de los autores en la primera página según la clase oficial `articleJJCIT.cls`.
+- **Portal oficial de envíos (Journal Manager):** [http://www.ejmanager.com/my/jjcit](http://www.ejmanager.com/my/jjcit) (acceso desde [https://jjcit.org/page/instructions_authors](https://jjcit.org/page/instructions_authors))
+- **Modalidad de revisión por pares:** **Simple Ciego (Single-Blind Peer Review)**. Los revisores evalúan de manera anónima (mínimo 3 evaluadores internacionales), pero el manuscrito incluye los nombres y filiaciones de los autores en la primera página según la clase oficial `articleJJCIT.cls`.
 - **Sección en OJS:** **Regular Research Paper**.
-- **Cobra APC (Article Processing Charges)?:** **NO ($0 USD)**. Revista 100% Diamond Open Access sin cargos por envío ni procesamiento.
+- **Cobra APC (Article Processing Charges)?:** **NO ($0 USD)**. Revista 100% Diamond Open Access sin cargos por envío ni procesamiento. Evidencia en `JOURNAL.md`.
+- **Requisitos de originalidad:** Se somete a chequeo antiplagio estricto con **iThenticate**. Prohibición de generación de contenido por IA en violación de la ética de investigación.
 
 ---
 
-## 2. Metadatos del Manuscrito (para carga en el formulario OJS)
+## 2. Metadatos del Manuscrito (para carga en el formulario de envío)
 
 ### Título del artículo:
 ```text
@@ -32,29 +38,29 @@ Phishing detection, Concept drift, Temporal evaluation, Adversarial machine lear
 ---
 
 ## 3. Autores y Filiación Institucional Oficial (Orden Estricto)
-1. **Juan Pablo Aviles-Esparza** (*Autor de correspondencia*)
+1. **Juan Pablo Aviles-Esparza** (*Primer Autor y Autor de Correspondencia*)
    - *Filiación:* Facultad de Informática y Electrónica, Escuela Superior Politécnica de Chimborazo (ESPOCH), Panamericana Sur km 1 1/2, Riobamba EC060155, Ecuador.
    - *Correo electrónico:* `juan.aviles@espoch.edu.ec`
    - *ORCID:* [0009-0007-0058-8069](https://orcid.org/0009-0007-0058-8069)
-2. **Italo Javier Tenempaguay-Granizo**
+2. **Italo Javier Tenempaguay-Granizo** (*Coautor*)
    - *Filiación:* Facultad de Informática y Electrónica, Escuela Superior Politécnica de Chimborazo (ESPOCH), Panamericana Sur km 1 1/2, Riobamba EC060155, Ecuador.
    - *Correo electrónico:* `italo.tenempaguay@espoch.edu.ec`
    - *ORCID:* [0009-0001-5753-4279](https://orcid.org/0009-0001-5753-4279)
-3. **Isaac David Torres-Paredes**
+3. **Isaac David Torres-Paredes** (*Coautor y Tutor Académico*)
    - *Filiación:* Facultad de Informática y Electrónica, Escuela Superior Politécnica de Chimborazo (ESPOCH), Panamericana Sur km 1 1/2, Riobamba EC060155, Ecuador.
    - *Correo electrónico:* `isaac.torres@espoch.edu.ec`
    - *ORCID:* [0009-0001-7057-9316](https://orcid.org/0009-0001-7057-9316)
 
 ---
 
-## 4. Archivos a Subir en la Plataforma OJS (Paso a Paso)
-- **Paso 2 de OJS (Upload Submission / Manuscrito Principal):**
-  - Subir: [`paper/P8_JJCIT_manuscript.pdf`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.pdf) (10 páginas compiladas bajo la clase oficial `articleJJCIT.cls`).
-  - Opcional requerido por JJCIT en etapas de producción: [`paper/P8_JJCIT_manuscript.docx`](file:///c:/Users/Juan/Desktop/PAPERS/08-jjcit-deriva-phishing/paper/P8_JJCIT_manuscript.docx).
-- **Paso 4 de OJS (Upload Supplementary Files / Archivos Complementarios):**
-  1. `paper/cover_letter.md` (Carta de presentación formal al Editor en Jefe de JJCIT).
-  2. `paper/declaraciones.md` (Declaraciones de autoría CRediT, ética COPE de uso de IA, disponibilidad de datos en Zenodo y ausencia de conflictos).
-  3. Paquete comprimido con fuentes completas de LaTeX: [`paquetes_envio/P08_JJCIT_paquete_envio.zip`](file:///c:/Users/Juan/Desktop/PAPERS/paquetes_envio/P08_JJCIT_paquete_envio.zip) (contiene `main.tex`, `refs.bib`, `articleJJCIT.cls`, `garamond.sty`, subcarpeta `figures/` con las 8 figuras vectoriales y raster de 300 DPI, `cover_letter.md`, `declaraciones.md`, `README.md`).
+## 4. Archivos a Subir en la Plataforma (Paso a Paso)
+- **Carga de Manuscrito Principal:**
+  - Subir: `P8_JJCIT_manuscript.pdf` (10 páginas compiladas bajo la clase oficial `articleJJCIT.cls` en A4, incluye figuras vectoriales y raster 300 DPI).
+  - Opcional/Requerido para producción por JJCIT: `P8_JJCIT_manuscript.docx` (versión Word estructurada según plantilla oficial A4).
+- **Archivos Complementarios (Supplementary Files):**
+  1. `cover_letter.md` (Carta de presentación formal al Editor en Jefe de JJCIT).
+  2. `declaraciones.md` (Declaraciones de autoría CRediT, ética COPE sobre uso de IA, disponibilidad de datos en Zenodo y ausencia de conflictos).
+  3. `P08_JJCIT_paquete_envio.zip` (Paquete comprimido con fuentes completas de LaTeX: `main.tex`, `refs.bib`, `articleJJCIT.cls`, `garamond.sty`, subcarpeta `figures/` con las 8 figuras, `README.md`).
 
 ---
 
@@ -76,15 +82,17 @@ Phishing detection, Concept drift, Temporal evaluation, Adversarial machine lear
 
 ## 6. Enlaces de Reproducibilidad y Datos Abiertos
 - **Repositorio público en GitHub:** [https://github.com/JuanAvilesP3/jjcit-deriva-phishing.git](https://github.com/JuanAvilesP3/jjcit-deriva-phishing.git)
-- **Depósito de datos y código en Zenodo:** [https://doi.org/10.5281/zenodo.22907772](https://doi.org/10.5281/zenodo.22907772) (DOI: `10.5281/zenodo.22907772`).
+- **Depósito permanente en Zenodo:** [https://doi.org/10.5281/zenodo.22907772](https://doi.org/10.5281/zenodo.22907772) (DOI: `10.5281/zenodo.22907772`).
 
 ---
 
-## 7. Lista de Chequeo Previa al Envío (Checklist)
-- [x] Manuscrito compilado a 10 páginas (límite máximo permitido en JJCIT es de 16 páginas).
-- [x] Figuras en alta resolución alojadas en la subcarpeta `figures/` e insertadas como `figures/figX...`.
+## 7. Lista de Chequeo Previa al Envío (Directrices FIE-ESPOCH 2026)
+- [x] Manuscrito compilado a 10 páginas (holgadamente dentro del límite máximo permitido en JJCIT de 16 páginas).
+- [x] 8 figuras de alta resolución alojadas en la subcarpeta `figures/` e insertadas como `figures/figX...`.
+- [x] Ninguna figura generada con IA de imágenes (regla dura de la Guía Metodológica).
 - [x] Cero errores de compilación en `pdflatex` y `bibtex`.
 - [x] Estilo bibliográfico IEEE numerado (`ieeetr.bst`) con 19 referencias y DOI/URL activo verificado.
 - [x] 3 citas locales a artículos de JJCIT incorporadas en el manuscrito (*Odeh et al. 2021, Alslman et al. 2024, Ashi et al. 2021*).
 - [x] Verificación estadística de tendencia decreciente monotónica con el test de Page ($Z = -2.66, p = 0.004$) y modelo ANCOVA ($p = 0.0048, R^2 = 0.695$).
 - [x] Filiación institucional corregida con acentuación oficial LaTeX (`Polit\'ecnica`).
+- [x] Exclusividad estricta de envío garantizada.
