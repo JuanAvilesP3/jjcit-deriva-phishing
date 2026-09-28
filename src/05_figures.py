@@ -28,6 +28,8 @@ from figures_style import COLORS, apply_style, save_figure
 PROC_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
 RESULTS_DIR = Path(__file__).resolve().parent.parent / "results" / "tables"
 FIG_DIR = Path(__file__).resolve().parent.parent / "results" / "figures"
+PAPER_FIG_DIR = Path(__file__).resolve().parent.parent / "paper" / "figures"
+PAPER_FIG_DIR.mkdir(parents=True, exist_ok=True)
 SEED = 42
 
 KEY_FEATURES = ["url_length", "num_suspicious_keywords", "url_entropy", "has_ip_address"]
@@ -49,6 +51,7 @@ def fig1_curva_degradacion(df):
     ax.set_ylabel("F1 Score")
     ax.legend(fontsize=9)
     save_figure(fig, FIG_DIR / "fig1_curva_degradacion")
+    save_figure(fig, PAPER_FIG_DIR / "fig1_curva_degradacion")
     plt.close(fig)
 
 
@@ -65,6 +68,7 @@ def fig2_estrategias(df):
     axes[0].set_ylabel("F1 Score")
     axes[0].legend(fontsize=8.5)
     save_figure(fig, FIG_DIR / "fig2_comparacion_estrategias")
+    save_figure(fig, PAPER_FIG_DIR / "fig2_comparacion_estrategias")
     plt.close(fig)
 
 
@@ -86,6 +90,7 @@ def fig3_desplazamiento_features(dataset):
 
     axes[0, 0].legend(fontsize=8)
     save_figure(fig, FIG_DIR / "fig3_desplazamiento_features")
+    save_figure(fig, PAPER_FIG_DIR / "fig3_desplazamiento_features")
     plt.close(fig)
 
 
@@ -127,6 +132,7 @@ def fig4_importancia_por_bloque(dataset):
 
     fig.colorbar(im, ax=ax, label="Feature Importance (Random Forest)")
     save_figure(fig, FIG_DIR / "fig4_importancia_por_bloque")
+    save_figure(fig, PAPER_FIG_DIR / "fig4_importancia_por_bloque")
     plt.close(fig)
 
 
