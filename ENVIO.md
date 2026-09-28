@@ -82,7 +82,7 @@ Phishing detection, Concept drift, Temporal evaluation, Adversarial machine lear
 
 ## 6. Enlaces de Reproducibilidad y Datos Abiertos
 - **Repositorio público en GitHub:** [https://github.com/JuanAvilesP3/jjcit-deriva-phishing.git](https://github.com/JuanAvilesP3/jjcit-deriva-phishing.git)
-- **Depósito permanente en Zenodo:** [https://doi.org/10.5281/zenodo.22907772](https://doi.org/10.5281/zenodo.22907772) (DOI: `10.5281/zenodo.22907772`).
+- **Depósito permanente en Zenodo:** [https://doi.org/10.5281/zenodo.23005762](https://doi.org/10.5281/zenodo.23005762) (DOI: `10.5281/zenodo.23005762`).
 
 ---
 
