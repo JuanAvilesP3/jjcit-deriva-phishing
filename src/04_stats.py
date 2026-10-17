@@ -7,7 +7,7 @@ P8 - Deriva conceptual en deteccion de phishing por URL
   - ANCOVA (F1 ~ distancia + modelo como efecto fijo): la regresion
     pooled de arriba mezcla, sin controlarlo, las diferencias fijas de
     F1 base entre los 3 modelos con la tendencia real que se quiere
-    medir (revision interna ronda 1). Controlar por modelo no
+    medir (revision interna). Controlar por modelo no
     cambia la pendiente (diseno balanceado) pero mejora la precision
     de su estimacion al sacar esa varianza entre modelos del residuo.
   - Prueba de Page (L) para tendencia monotona decreciente de F1 con
@@ -62,7 +62,7 @@ def page_l_from_ranks(ranks: np.ndarray) -> float:
 
 def page_l_permutation_test(matrix: np.ndarray, n_perm: int = 100_000, seed: int = 42):
     """Prueba de Page exacta por permutacion Monte Carlo (revision
-    adversarial ronda 2: con solo 3 jueces la aproximacion normal
+    interna: con solo 3 jueces la aproximacion normal
     asintotica del test de Page, ya sennalada como de poca potencia en
     el comentario de page_l_test, no es del todo confiable). Bajo H0
     cada juez (modelo) ordena las k condiciones de forma intercambiable
@@ -129,7 +129,7 @@ def main():
     print("Nota: solo 3 jueces (modelos) -> la aproximación normal tiene poca potencia; interpretar con cautela.")
 
     # --- Robustez: prueba de Page exacta por permutacion (revision
-    # adversarial ronda 2, responde directamente a la nota de arriba) ---
+    # interna, responde directamente a la nota de arriba) ---
     L_obs, p_perm, null_L = page_l_permutation_test(pivot.values, n_perm=100_000)
     print(f"\n=== Prueba de Page, robustez por permutación Monte Carlo (100,000 iteraciones) ===")
     print(f"L observado={L_obs:.1f}  p (permutación, unilateral, decreciente)={p_perm:.5f}")

@@ -2,7 +2,7 @@
 P8 - Deriva conceptual en deteccion de phishing por URL
 03b_ablation_experiment.py
 
-Prueba de ablacion pedida por la revision interna: is_https,
+Prueba de ablacion pedida en la revision interna: is_https,
 path_length, num_slashes y url_length dominan la importancia de
 features en todos los bloques (Figura 4). Como las URLs legitimas
 salen de dominios desnudos de Tranco (sin ruta) y las de phishing
@@ -13,7 +13,7 @@ modelos en el diseño "fija" (bloque 1 -> bloques 2..6) SIN esas 4
 columnas y compara el F1 resultante contra el original.
 
 Si el F1 se mantiene cerca de 0.98+, la señal de phishing sobrevive
-sin esas 4 variables y la preocupacion del revisor queda descartada.
+sin esas 4 variables y esa preocupacion queda descartada.
 Si el F1 cae sustancialmente, confirma que gran parte de la
 separacion viene de esas 4 variables.
 """

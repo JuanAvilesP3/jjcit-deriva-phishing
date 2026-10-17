@@ -2,7 +2,7 @@
 P8 - Deriva conceptual en deteccion de phishing por URL
 03c_bootstrap_strategy_comparison.py
 
-La revision interna señalo que el Wilcoxon pareado entre
+En la revision interna se señalo que el Wilcoxon pareado entre
 ventana deslizante y acumulativa (Resultados) solo tiene 3-4 pares
 por modelo, asi que su p minimo alcanzable en dos colas es
 0.125-0.25: no tiene potencia para rechazar bajo ningun resultado

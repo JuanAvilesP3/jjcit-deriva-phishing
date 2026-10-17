@@ -2,7 +2,7 @@
 P8 - Deriva conceptual en deteccion de phishing por URL
 03d_size_matched_cumulative.py
 
-Robustez (revision interna, seguimiento): la Limitaciones del
+Robustez: la Limitaciones del
 manuscrito senala que el reentrenamiento acumulativo (bloques 0..k) y
 el de ventana deslizante (solo bloque k) difieren tanto en volumen de
 datos de entrenamiento como en que tan antiguos son esos datos, y que

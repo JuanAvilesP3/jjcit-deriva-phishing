@@ -16,3 +16,12 @@ data/processed/
 
 # Paquete de envio generado (make_envio.py); copias de paper/
 envio/
+
+# Documentos internos del proceso de envio (se mantienen solo en local)
+ENVIO.md
+envio_LEEME.md
+JOURNAL.md
+BITACORA.md
+paper/cover_letter.md
+paper/declaraciones.md
+paper/alslman2.pdf
