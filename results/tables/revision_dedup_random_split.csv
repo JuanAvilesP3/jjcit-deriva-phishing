@@ -1,0 +1,7 @@
+data,n,model,f1_random_split
+all_rows,58598,random_forest,0.9952013710368466
+all_rows,58598,xgboost,0.9951186092318233
+all_rows,58598,logistic_regression,0.9933922595039903
+dedup_feature_vectors,40961,random_forest,0.9946298427311085
+dedup_feature_vectors,40961,xgboost,0.994057887674909
+dedup_feature_vectors,40961,logistic_regression,0.9931842181050207

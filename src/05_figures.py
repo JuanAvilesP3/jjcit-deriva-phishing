@@ -38,18 +38,24 @@ MODEL_LABELS = {"random_forest": "Random Forest", "xgboost": "XGBoost", "logisti
 
 
 def fig1_curva_degradacion(df):
+    # Revision cruzada (16/10): marcadores y trazos distintos por modelo para lectura en B/N,
+    # lineas base rotuladas y eje Y acotado declarado en el pie.
     fija = df[df.strategy == "fija"]
     aleatoria = df[df.strategy == "aleatoria"].set_index("model")["f1"]
+    styles = {"random_forest": ("o", "-"), "xgboost": ("s", "--"), "logistic_regression": ("^", ":")}
 
     fig, ax = plt.subplots(figsize=(7.5, 5))
     for model in fija["model"].unique():
         sub = fija[fija.model == model].sort_values("distance")
-        ax.plot(sub["distance"], sub["f1"], marker="o", color=MODEL_COLORS[model], label=MODEL_LABELS[model])
-        ax.axhline(aleatoria[model], color=MODEL_COLORS[model], linestyle="--", linewidth=1, alpha=0.6)
-
+        marker, ls = styles[model]
+        ax.plot(sub["distance"], sub["f1"], marker=marker, linestyle=ls, color=MODEL_COLORS[model], label=MODEL_LABELS[model])
+        ax.axhline(aleatoria[model], color=MODEL_COLORS[model], linestyle=ls, linewidth=0.8, alpha=0.5)
+    ax.plot([], [], color="grey", linewidth=0.8, alpha=0.6, label="Random-split baseline\n(thin line, same style as its model)")
+    ax.set_xlim(0.8, 5.2)
+    ax.set_xticks([1, 2, 3, 4, 5])
     ax.set_xlabel("Temporal distance to training block (blocks)")
-    ax.set_ylabel("F1 Score")
-    ax.legend(fontsize=9)
+    ax.set_ylabel("F1 Score (truncated axis)")
+    ax.legend(fontsize=9, loc="lower left")
     save_figure(fig, FIG_DIR / "fig1_curva_degradacion")
     save_figure(fig, PAPER_FIG_DIR / "fig1_curva_degradacion")
     plt.close(fig)
@@ -60,11 +66,13 @@ def fig2_estrategias(df):
     for ax, model in zip(axes, MODEL_LABELS):
         for strategy, color, marker, strat_label in [("ventana", COLORS["secondary"], "s", "Sliding window"), ("acumulativa", COLORS["primary"], "o", "Cumulative retraining")]:
             sub = df[(df.model == model) & (df.strategy == strategy)].copy()
-            sub["eval_block"] = sub["eval_block"].astype(int)
+            # eval_block va de 1 a 5 con indice 0; en el articulo los bloques se numeran 1..6
+            sub["eval_block"] = sub["eval_block"].astype(int) + 1
             sub = sub.sort_values("eval_block")
             ax.plot(sub["eval_block"], sub["f1"], marker=marker, color=color, label=strat_label)
         ax.set_title(MODEL_LABELS[model], fontsize=9.5)
         ax.set_xlabel("Evaluated block")
+        ax.set_xticks([2, 3, 4, 5, 6])
     axes[0].set_ylabel("F1 Score")
     axes[0].legend(fontsize=8.5)
     save_figure(fig, FIG_DIR / "fig2_comparacion_estrategias")
@@ -73,22 +81,42 @@ def fig2_estrategias(df):
 
 
 def fig3_desplazamiento_features(dataset):
+    # Revision cruzada (16/10): mismos bloques que el experimento (cuantiles de fecha sobre todo el
+    # dataset), la clase legitima como referencia, barras de proporcion para las variables binarias
+    # o de conteo pequeno, y url_length recortada al percentil 99.
     dataset = dataset.copy()
     dataset["timestamp"] = pd.to_datetime(dataset["timestamp"], utc=True, format="ISO8601")
-    phishing = dataset[dataset.label == 1].sort_values("timestamp")
     n_blocks = 6
-    phishing["block"] = pd.qcut(phishing["timestamp"], q=n_blocks, labels=False)
-    first_block = phishing[phishing.block == 0]
-    last_block = phishing[phishing.block == n_blocks - 1]
+    dataset["block"] = pd.qcut(dataset["timestamp"], q=n_blocks, labels=False)
+    groups = [("Phishing, block 1", (dataset.label == 1) & (dataset.block == 0), COLORS["secondary"], "///"),
+              (f"Phishing, block {n_blocks}", (dataset.label == 1) & (dataset.block == n_blocks - 1), COLORS["primary"], ""),
+              ("Legitimate, all blocks", dataset.label == 0, COLORS["neutral"], "...")]
 
     fig, axes = plt.subplots(2, 2, figsize=(9, 7))
     for ax, feat in zip(axes.flat, KEY_FEATURES):
-        ax.hist(first_block[feat], bins=30, alpha=0.55, color=COLORS["secondary"], density=True, label="Block 1 (earliest)")
-        ax.hist(last_block[feat], bins=30, alpha=0.55, color=COLORS["primary"], density=True, label=f"Block {n_blocks} (latest)")
+        if feat in ("url_length", "url_entropy"):
+            hi = dataset[feat].quantile(0.99)
+            bins = np.linspace(dataset[feat].min(), hi, 31)
+            for label, mask, color, _ in groups:
+                ax.hist(dataset.loc[mask, feat].clip(upper=hi), bins=bins, histtype="step", linewidth=1.4,
+                        density=True, color=color, label=label)
+            ax.set_ylabel("Density")
+            if feat == "url_length":
+                ax.set_xlabel("characters (clipped at 99th percentile)", fontsize=8)
+        else:
+            values = sorted(dataset[feat].clip(upper=3).unique())
+            width = 0.27
+            for i, (label, mask, color, hatch) in enumerate(groups):
+                share = dataset.loc[mask, feat].clip(upper=3).value_counts(normalize=True).reindex(values, fill_value=0)
+                ax.bar(np.arange(len(values)) + (i - 1) * width, share.values, width=width, color=color, alpha=0.75,
+                       hatch=hatch, edgecolor="black", linewidth=0.4, label=label)
+            ax.set_xticks(np.arange(len(values)))
+            ax.set_xticklabels([str(int(v)) if v < 3 else "3+" for v in values])
+            ax.set_ylabel("Proportion of URLs")
         ax.set_title(feat, fontsize=9.5)
-        ax.set_ylabel("Density")
 
-    axes[0, 0].legend(fontsize=8)
+    axes[0, 0].legend(fontsize=7.5)
+    fig.subplots_adjust(hspace=0.38)
     save_figure(fig, FIG_DIR / "fig3_desplazamiento_features")
     save_figure(fig, PAPER_FIG_DIR / "fig3_desplazamiento_features")
     plt.close(fig)

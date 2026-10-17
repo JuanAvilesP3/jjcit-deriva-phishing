@@ -1,0 +1,10 @@
+feature_set,dropped,model,f1_mean,balanced_accuracy_mean
+full,,logistic_regression,0.991063778690226,0.9911190308452298
+full,,random_forest,0.9943999794433755,0.9944211734524115
+full,,xgboost,0.9935031233382047,0.9934581259815246
+no_url_shape,is_https;path_length;num_slashes;url_length,logistic_regression,0.9491784607669231,0.9517031464867086
+no_url_shape,is_https;path_length;num_slashes;url_length,random_forest,0.9617140174880972,0.9630477278690878
+no_url_shape,is_https;path_length;num_slashes;url_length,xgboost,0.9601244883342861,0.961180820332291
+no_other_top4,url_entropy;num_dots;num_subdomains;hostname_length,logistic_regression,0.9872899305267848,0.987446030844249
+no_other_top4,url_entropy;num_dots;num_subdomains;hostname_length,random_forest,0.9905742820589545,0.9906285102898267
+no_other_top4,url_entropy;num_dots;num_subdomains;hostname_length,xgboost,0.992998536910665,0.9929677528761163
