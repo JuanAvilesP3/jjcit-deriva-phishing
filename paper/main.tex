@@ -1,54 +1,135 @@
-\documentclass[11pt,twoside]{article}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{booktabs}
-\usepackage[square,sort,comma,numbers]{natbib}
-\usepackage{times}
-\usepackage{mathptmx}
-\usepackage[T1]{fontenc}
-\usepackage{fancyhdr}
+\documentclass[10pt, a4paper, oneside]{article}
 \usepackage[hidelinks]{hyperref}
-\usepackage[paperheight=11.69in,paperwidth=8.27in,left=0.98in,right=0.98in,top=0.98in,bottom=0.59in,headheight=1in]{geometry}
-\usepackage[utf8]{inputenc}
+\usepackage{jucs2e}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{scalerel}
+\usepackage{setspace}
+\usepackage[strict]{changepage}
+\usepackage{caption}
+\usepackage[letterspace=-50]{microtype}
+\usepackage{fontspec}
+\usepackage{afterpage}
+\usepackage{ragged2e}
+\usepackage{booktabs}
 
-\DeclareCaptionLabelSeparator{period}{. }
-\captionsetup{labelsep=period}
+\setmainfont{Times New Roman}
 
+\usepackage{titlesec}
+
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+
+\renewcommand{\baselinestretch}{0.9}
+
+\graphicspath{{./figures/}}
+
+\usepackage[textwidth=8cm, margin=0cm, left=4.6cm, right=4.2cm, top=3.9cm, bottom=6.8cm, a4paper, headheight=0.5cm, headsep=0.5cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage[format=plain, labelfont=it, textfont=it, justification=centering]{caption}
+% Pies de figura y tabla: 10 pt cursiva con 11 pt de interlineado y 12 pt antes y despues, como indica la plantilla
+\DeclareCaptionFont{jucscap}{\fontsize{10pt}{11pt}\selectfont}
+\captionsetup{font=jucscap, skip=12pt, belowskip=0pt}
+% jucs2e.sty fija \belowcaptionskip en -10pt, lo que monta el pie de una figura sobre el de la tabla siguiente
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\floatsep}{16pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{16pt plus 2pt minus 2pt}
+\setlength{\intextsep}{16pt plus 2pt minus 2pt}
+\usepackage{breakcites}
+\usepackage{microtype}
+
+\apptocmd{\frame}{}{\justifying}{}
+
+\urlstyle{same}
 \pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE]{\thepage \quad {\fontsize{8pt}{11pt}\selectfont "Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation", J. P. Aviles-Esparza et al.}}
 
-\renewcommand{\headrulewidth}{0pt}
+\newcommand\jucs{{Journal of Universal Computer Science}}
+\newcommand\jucsvol{vol. --, no. -- (----)}
+\newcommand\jucspages{--}
+\newcommand\jucssubmitted{--}
+\newcommand\jucsaccepted{--}
+\newcommand\jucsappeared{--}
+\newcommand\jucslicence{ CC BY 4.0}
+\newcommand\startingPage{1}
+\setcounter{page}{\startingPage}
 
-\providecommand{\citep}[1]{\cite{#1}}
-\providecommand{\citet}[1]{\cite{#1}}
+%Author
+\newcommand\paperauthor{{Aviles-Esparza J. P. et al.: }}
+
+% Title
+\newcommand\papertitle{Concept Drift in URL-Based Phishing Detection: A Temporal Evaluation}
+
+% Main header content
+\header{\paperauthor \papertitle}
+% La cabecera de paginas pares de jucs2e.sty trae fijo el texto de ejemplo de la plantilla;
+% se redefine aqui con los autores y el titulo de este articulo.
+\fancyhead[OC]{%
+  {\ifnum\thepage=\startingPage
+  \begin{singlespace}
+      \fontsize{8pt}{5pt}\selectfont{\itshape{\jucs, \jucsvol, \jucspages \\ submitted: \jucssubmitted, accepted: \jucsaccepted, appeared: \jucsappeared \jucslicence}}
+      \vspace{-5mm}
+  \end{singlespace}
+  \else
+      \lsstyle
+      {\fontsize{8pt}{5pt}\selectfont{\itshape{Aviles-Esparza J. P. et al.: Concept Drift in URL-Based Phishing Detection}}}
+      \vspace{-0.5mm}
+  \fi}}
 
 \begin{document}
 
-\title{\fontsize{20pt}{22pt}\selectfont \textbf{CONCEPT DRIFT IN URL-BASED PHISHING DETECTION: A TEMPORAL EVALUATION}}
-\setlength{\parskip}{12.0pt}\par
+\title{{\fontsize{14pt}{14pt}\selectfont{\vspace*{-3mm}\papertitle\vspace*{-1mm}}}}
 
-\author{Juan Pablo Aviles-Esparza\footnote{J. P. Aviles-Esparza, I. J. Tenempaguay-Granizo, and I. D. Torres-Paredes are with the Software Engineering Department, Faculty of Informatics and Electronics, Escuela Superior Politécnica de Chimborazo (ESPOCH), Riobamba 060155, Ecuador. E-mails: \{juan.aviles, italo.tenempaguay, isaac.torres\}@espoch.edu.ec. Corresponding author: J. P. Aviles-Esparza (juan.aviles@espoch.edu.ec). ORCIDs: 0009-0007-0058-8069 (J. P. Aviles-Esparza), 0009-0001-5753-4279 (I. J. Tenempaguay-Granizo), 0009-0001-7057-9316 (I. D. Torres-Paredes).}, \\ Italo Javier Tenempaguay-Granizo, \\ and Isaac David Torres-Paredes}
-\date{}
+\author{{\bfseries\fontsize{10pt}{10pt}\selectfont{Juan Pablo Aviles-Esparza*}} \\
+   {\fontsize{9pt}{12pt}\selectfont{(Escuela Superior Polit\'ecnica de Chimborazo, Riobamba, Ecuador\\
+   \orcid{0009-0007-0058-8069}, 
+   juan.aviles@espoch.edu.ec)}}
+   \and
+   {\bfseries\fontsize{10pt}{10pt}\selectfont{Italo Javier Tenempaguay-Granizo}} \\
+   {\fontsize{9pt}{12pt}\selectfont{(Escuela Superior Polit\'ecnica de Chimborazo, Riobamba, Ecuador\\
+   \orcid{0009-0001-5753-4279}, 
+   italo.tenempaguay@espoch.edu.ec)}}
+   \and
+   {\bfseries\fontsize{10pt}{10pt}\selectfont{Isaac David Torres-Paredes}} \\
+   {\fontsize{9pt}{12pt}\selectfont{(Escuela Superior Polit\'ecnica de Chimborazo, Riobamba, Ecuador\\
+   \orcid{0009-0001-7057-9316}, 
+   isaac.torres@espoch.edu.ec)}}
+}
+
+\label{first}
 \maketitle
-\sloppy
 
-{\fontsize{13pt}{11pt} \textit{\textbf{ABSTRACT}}}\par
-\setlength{\parskip}{6.0pt}
-\fontsize{10pt}{12.0pt}\selectfont 
-{\textit{Phishing detectors are almost universally evaluated with random train/test splits, which implicitly assume that a URL's characteristics are exchangeable across time. We test that assumption by training three lexical-feature classifiers (random forest, XGBoost, logistic regression) on 180 days of PhishTank-reported phishing URLs plus an equal number of legitimate domains from the Tranco ranking, and evaluating them under four designs: a random split, training on the earliest block and testing on each later block, a sliding retraining window, and cumulative retraining. All three models achieve F1 above 0.98 in every configuration, and the gap between the random-split baseline and the worst temporally displaced block is small (0.36 to 0.92 percentage points of F1). All three models decline with temporal distance, but with the evaluation block as the independent unit the trend is not significant (Spearman $\rho=-0.70$, $p=0.19$, five blocks; $\rho=-0.44$, $p=0.18$, eleven blocks), so we report it as consistent in direction but weakly supported. The near-ceiling performance reflects how the data were built: legitimate URLs are bare domains, and removing the four features tied to URL shape (\texttt{is\_https}, \texttt{path\_length}, \texttt{num\_slashes}, \texttt{url\_length}) lowers F1 by 3.3 to 4.2 points, whereas removing four other important features lowers it by at most 0.4. Because PhishTank's feed lists only phishing that is still online, older phishing is under-represented and the phishing share per block rises from 25\% to 62\%; prevalence-independent metrics show the same pattern. Temporal evaluations of phishing detection need a negative class of full legitimate URLs with real timestamps.}}\par
+{\fontfamily{ptm}\selectfont
+\begin{abstract}
+{\fontsize{9pt}{9pt}\selectfont{\vspace*{-2mm}
+Phishing detectors are almost universally evaluated with random train/test splits, which implicitly assume that a URL's characteristics are exchangeable across time. We test that assumption by training three lexical-feature classifiers (random forest, XGBoost, logistic regression) on 180 days of PhishTank-reported phishing URLs plus an equal number of legitimate domains from the Tranco ranking, and evaluating them under four designs: a random split, training on the earliest block and testing on each later block, a sliding retraining window, and cumulative retraining. All three models achieve F1 above 0.98 in every configuration, and the gap between the random-split baseline and the worst temporally displaced block is small (0.36 to 0.92 percentage points of F1). All three models decline with temporal distance, but with the evaluation block as the independent unit the trend is not significant (Spearman $\rho=-0.70$, $p=0.19$, five blocks; $\rho=-0.44$, $p=0.18$, eleven blocks), so we report it as consistent in direction but weakly supported. The near-ceiling performance reflects how the data were built: legitimate URLs are bare domains, and removing the four features tied to URL shape (\texttt{is\_https}, \texttt{path\_length}, \texttt{num\_slashes}, \texttt{url\_length}) lowers F1 by 3.3 to 4.2 points, whereas removing four other important features lowers it by at most 0.4. Because PhishTank's feed lists only phishing that is still online, older phishing is under-represented and the phishing share per block rises from 25\% to 62\%; prevalence-independent metrics show the same pattern. Temporal evaluations of phishing detection need a negative class of full legitimate URLs with real timestamps.}}
+\end{abstract}}
 
-\vspace{6pt}
-{\fontsize{13pt}{10pt} \textit{\textbf{KEYWORDS}}}\par
-\setlength{\parskip}{12.0pt}
-{\textit{Phishing detection, Concept drift, Temporal evaluation, Adversarial machine learning, Lexical features, Cybersecurity.}}\par
+{\fontfamily{ptm}\selectfont
+\begin{keywords}
+{\fontsize{9pt}{9pt}\selectfont{
+Phishing detection, Concept drift, Temporal evaluation, Lexical features, Machine learning, Cybersecurity}}
+\end{keywords}}
+
+{\fontfamily{ptm}\selectfont
+\begin{category}
+{\fontsize{9pt}{9pt}\selectfont{
+C.2.0, I.2.6, I.5.2, K.6.5}}
+\end{category}}
+
+{\fontfamily{ptm}\selectfont
+\begin{doi}
+{\fontsize{9pt}{9pt}\selectfont{
+10.3897/jucs.\textless SubmissionNumber\textgreater}}
+\end{doi}}
+
+{\fontsize{9pt}{11pt}\selectfont *Corresponding author.}
 
 \section{Introduction}
 
-Phishing is an adversarial instance of the broader concept-drift problem in machine learning~\citep{gama2014survey}: attackers change URL patterns, hosting infrastructure, and lexical tricks specifically to evade whatever a detector has already learned to flag. A classifier trained and evaluated with a single random train/test split treats every URL in the dataset as drawn from one stationary distribution, which is precisely the assumption an adversarial, evolving threat violates. If that assumption is wrong, published accuracy figures based on random splits systematically overstate what a detector will achieve once deployed against future, unseen phishing campaigns.
+Phishing is an adversarial instance of the broader concept-drift problem in machine learning \cite{gama2014survey}: attackers change URL patterns, hosting infrastructure, and lexical tricks specifically to evade whatever a detector has already learned to flag. A classifier trained and evaluated with a single random train/test split treats every URL in the dataset as drawn from one stationary distribution, which is precisely the assumption an adversarial, evolving threat violates. If that assumption is wrong, published accuracy figures based on random splits systematically overstate what a detector will achieve once deployed against future, unseen phishing campaigns.
 
 This paper asks how large that gap is, using a temporal evaluation design instead of a random one, and compares two common mitigation strategies, periodic retraining with a sliding window versus cumulative retraining that keeps all historical examples, to see whether either meaningfully closes it. We evaluate on 180 days of continuously reported phishing URLs, which lets us construct time-ordered evaluation blocks instead of simulating drift artificially.
 
@@ -56,19 +137,19 @@ The contributions of this work are: (1) a temporal, block-based evaluation of le
 
 \section{Related Work}
 
-Odeh et al.~\citep{odeh2021phiboost} propose PhiBoost, an adaptive-boosting phishing detector that selects the features most correlated with the class label, and report accuracy of approximately 99\% on a static dataset; a time-agnostic evaluation of this kind is the protocol this paper argues is insufficient on its own, since it cannot distinguish a detector that has learned durable phishing indicators from one that has overfit to the particular campaigns present in the training window. Sahingoz et al.~\citep{sahingoz2019phishing} benchmark seven classifiers on natural-language-processing features extracted from URLs, with Random Forest (also the strongest model in our study) performing best at close to 98\% accuracy; because their features are also URL-based, the temporal gap we measure bears directly on how such baselines should be read, rather than on the choice of classifier. Alslman et al.~\citep{alslman2024ddos} evaluate ensemble models (the same broad model family we use here) for DDoS attack detection at scale using Spark and report 99.94\% accuracy, but do not examine whether detection performance is stable as the underlying attack traffic changes over time; our temporal-block design is directly applicable to that setting as well, and we frame our contribution partly as a methodological recommendation that extends beyond phishing specifically to security classification tasks built on adversarial, time-varying data. Furthermore, in a systematic survey within this journal's scope, Ashi et al.~\citep{ashi2021nids} review how supervised machine-learning classifiers, dimensionality-reduction techniques, and evaluation metrics are used in recent network intrusion detection work; our study adds a temporal dimension to that kind of evaluation, for lexical phishing features.
+Odeh et al. \cite{odeh2021phiboost} propose PhiBoost, an adaptive-boosting phishing detector that selects the features most correlated with the class label, and report accuracy of approximately 99\% on a static dataset; a time-agnostic evaluation of this kind is the protocol this paper argues is insufficient on its own, since it cannot distinguish a detector that has learned durable phishing indicators from one that has overfit to the particular campaigns present in the training window. Sahingoz et al. \cite{sahingoz2019phishing} benchmark seven classifiers on natural-language-processing features extracted from URLs, with Random Forest (also the strongest model in our study) performing best at close to 98\% accuracy; because their features are also URL-based, the temporal gap we measure bears directly on how such baselines should be read, rather than on the choice of classifier. Concept drift in adversarial text classification has also been studied for spam: Henke et al. \cite{henke2021spam} detect drift by comparing the feature vectors extracted from training and test data, and transfer knowledge between models when the features evolve, which is the kind of feature-level shift we examine for phishing URLs (Discussion). Our temporal blocks follow the block-based evaluation used in data-stream classification; Kozal et al. \cite{kozal2022chunk} show that the size of those blocks affects how quickly a classifier recovers after a drift, which is one reason we repeat the block-level analysis with twelve blocks as well as six. Duraz et al. \cite{duraz2024cvss} argue that intrusion detection systems should be evaluated with metrics that reflect the severity of the attacks, not with accuracy alone; our use of prevalence-independent metrics responds to a related concern about how evaluation choices shape the performance a detector appears to have. On the human side, Crgol and Vrhovec \cite{crgol2024phishing} find that recognising phishing emails in a survey is not associated with how people respond to a real phishing campaign, which motivates automated detection that does not depend on user judgement.
 
-This concern is not new to security classification in general: Pendlebury et al.~\citep{pendlebury2019tesseract} name and formalize the same failure mode for malware classifiers under the label \emph{temporal bias}, showing that a naive random train/test split can silently mix future and past samples and thereby overstate real-world performance, and propose constraints for avoiding it: training strictly on data older than the test data, testing with a realistic ratio between the classes, and drawing both classes from the same time windows. Our fixed, sliding-window, and cumulative designs satisfy the first constraint by construction but not the other two, because the dataset is balanced overall and the legitimate class carries synthetic timestamps (Limitations). The phishing URL studies reviewed below evaluate on static or randomly split data, so the temporal question is the gap this paper addresses. Jemili et al.~\citep{jemili2024ids} address concept drift in network intrusion detection by combining a drift-detection method with an online random forest that is updated incrementally, evaluated on the MAWILab traffic data; their work treats drift as a practical concern in security classification streams, but they do not study lexical URL features or control for the contribution of class-boundary difficulty to the observed gap, which is the mechanistic question we pursue here. Apruzzese et al.~\citep{apruzzese2023real} examine the gap between adversarial machine-learning research and operational practice and argue, from real-world case studies, that actual attackers mostly use simple tactics rather than the algorithmic attacks studied in the literature. If so, random-split evaluations are unrealistic in two ways: in their time ordering and in the adversarial capability they assume. We take that as additional motivation for a design that at least corrects the temporal dimension, even if it does not resolve the adversarial-realism dimension.
+This concern is not new to security classification in general: Pendlebury et al. \cite{pendlebury2019tesseract} name and formalize the same failure mode for malware classifiers under the label \emph{temporal bias}, showing that a naive random train/test split can silently mix future and past samples and thereby overstate real-world performance, and propose constraints for avoiding it: training strictly on data older than the test data, testing with a realistic ratio between the classes, and drawing both classes from the same time windows. Our fixed, sliding-window, and cumulative designs satisfy the first constraint by construction but not the other two, because the dataset is balanced overall and the legitimate class carries synthetic timestamps (Limitations). The phishing URL studies reviewed below evaluate on static or randomly split data, so the temporal question is the gap this paper addresses. Jemili et al. \cite{jemili2024ids} address concept drift in network intrusion detection by combining a drift-detection method with an online random forest that is updated incrementally, evaluated on the MAWILab traffic data; their work treats drift as a practical concern in security classification streams, but they do not study lexical URL features or control for the contribution of class-boundary difficulty to the observed gap, which is the mechanistic question we pursue here. Apruzzese et al. \cite{apruzzese2023real} examine the gap between adversarial machine-learning research and operational practice and argue, from real-world case studies, that actual attackers mostly use simple tactics rather than the algorithmic attacks studied in the literature. If so, random-split evaluations are unrealistic in two ways: in their time ordering and in the adversarial capability they assume. We take that as additional motivation for a design that at least corrects the temporal dimension, even if it does not resolve the adversarial-realism dimension.
 
-At the survey level, Buczak and Guven~\citep{buczak2016survey} review machine-learning and data-mining methods for intrusion detection, describe the data sets commonly used to evaluate them, and discuss the challenges of applying these methods in cyber security; they do not compare retraining strategies under temporal separation, which is the comparison our study provides for phishing URLs (fixed, sliding-window, and cumulative retraining). Varshney, Misra and Atrey~\citep{varshney2016phishing} provide a complementary survey and classification of web phishing detection schemes; our study concerns URL-based (lexical) detection only and asks an empirical question such surveys do not settle: whether lexical-only detectors maintain their reported accuracy as the phishing population changes over time.
+At the survey level, Buczak and Guven \cite{buczak2016survey} review machine-learning and data-mining methods for intrusion detection, describe the data sets commonly used to evaluate them, and discuss the challenges of applying these methods in cyber security; they do not compare retraining strategies under temporal separation, which is the comparison our study provides for phishing URLs (fixed, sliding-window, and cumulative retraining). Varshney, Misra and Atrey \cite{varshney2016phishing} provide a complementary survey and classification of web phishing detection schemes; our study concerns URL-based (lexical) detection only and asks an empirical question such surveys do not settle: whether lexical-only detectors maintain their reported accuracy as the phishing population changes over time.
 
-The feature-engineering and modelling approaches evaluated in this paper have direct precedents in the phishing-detection literature. Mohammad, Thabtah and McCluskey~\citep{mohammad2014phishing} introduce an intelligent rule-based classifier for phishing websites using URL and page-level features, and in a companion study~\citep{mohammad2013neural} apply self-structuring neural networks to the same feature family; both are evaluated on static datasets, which places their results closest to the random-split condition in our design and makes them subject to the same temporal-bias concern that Pendlebury et al.~\citep{pendlebury2019tesseract} formalize for malware and that we quantify here for phishing. Singh and Meenu~\citep{singh2020phishing} survey machine-learning approaches to phishing website detection from URLs; whether the performance such detectors report holds as phishing changes over time is the gap this paper addresses. Somesha et al.~\citep{somesha2020phishing} apply deep-learning architectures to phishing website detection and report very high accuracy; in our lexical-feature setting, comparatively simple tree ensembles already reach F1 above 0.99, with Random Forest the strongest model in all four temporal designs. Hannousse and Yahiouche~\citep{hannousse2021benchmark} construct benchmark datasets for machine-learning-based website phishing detection and argue that results depend on how such datasets are built; our ablation gives one concrete instance of that dependence, with the features most tied to how the Tranco-derived legitimate class was constructed accounting for 3.3 to 4.1 F1 points (Results, Table~\ref{tab:ablation}).
+The feature-engineering and modelling approaches evaluated in this paper have direct precedents in the phishing-detection literature. Mohammad, Thabtah and McCluskey \cite{mohammad2014phishing} introduce an intelligent rule-based classifier for phishing websites using URL and page-level features, and in a companion study \cite{mohammad2013neural} apply self-structuring neural networks to the same feature family; both are evaluated on static datasets, which places their results closest to the random-split condition in our design and makes them subject to the same temporal-bias concern that Pendlebury et al. \cite{pendlebury2019tesseract} formalize for malware and that we quantify here for phishing. Singh and Meenu \cite{singh2020phishing} survey machine-learning approaches to phishing website detection from URLs; whether the performance such detectors report holds as phishing changes over time is the gap this paper addresses. Somesha et al. \cite{somesha2020phishing} apply deep-learning architectures to phishing website detection and report very high accuracy; in our lexical-feature setting, comparatively simple tree ensembles already reach F1 above 0.99, with Random Forest the strongest model in all four temporal designs. Hannousse and Yahiouche \cite{hannousse2021benchmark} construct benchmark datasets for machine-learning-based website phishing detection and argue that results depend on how such datasets are built; our ablation gives one concrete instance of that dependence, with the features most tied to how the Tranco-derived legitimate class was constructed accounting for 3.3 to 4.1 F1 points (Results, Table~\ref{tab:ablation}).
 
 
 \section{Methodology}
 
 \subsection{Data}
-Phishing URLs were drawn from PhishTank's public feed, which is the only phishing source we found that ships a reliable, unauthenticated \texttt{submission\_time} timestamp per URL (OpenPhish's community feed and the static UCI Phishing Websites / PhiUSIIL datasets do not carry a comparable per-record date and were excluded from this design for that reason). We retained the submissions of the most recent 180 days, from 20 February to 19 August 2026 (29{,}299 URLs). PhishTank's downloadable feed lists only verified phishing that is still online (every record in our download has \texttt{online} = yes), so phishing reported earlier and already taken down is missing: older weeks contain fewer surviving URLs, and those that survive are likely to be longer-lived than average. Legitimate URLs were sampled from the Tranco top-1M list~\citep{lepochat2019tranco} , chosen over alternatives such as the (now-discontinued) Alexa ranking because Tranco is designed to resist the list-manipulation attacks that make raw popularity rankings an unreliable ground truth for security research. Tranco lists domains, not URLs; each sampled domain was turned into a URL by prefixing \texttt{http://} with no path, so every legitimate URL has \texttt{is\_https} $=0$ and \texttt{path\_length} $=0$, whereas 83.4\% of the phishing URLs use \texttt{https}. This asymmetry is examined in the ablation (Discussion). Because Tranco is a single ranked snapshot rather than a dated feed, each sampled legitimate URL was assigned a synthetic timestamp drawn uniformly over the same 180-day window as the phishing data, a deliberate simplification justified because domain reputation for an established, highly ranked site does not meaningfully change on a 180-day horizon, in contrast to phishing infrastructure, which is exactly what this study measures as changing. The final dataset is balanced overall (29{,}299 phishing, 29{,}299 legitimate) but not within temporal blocks: because surviving phishing becomes more frequent towards the end of the window while legitimate timestamps are uniform, the phishing share of the six blocks is 24.8, 45.2, 52.4, 58.3, 57.0, and 62.4\%. Duplicate URLs were not present, but 17{,}637 rows (30.1\%) repeat another row's feature vector, mostly in the legitimate class; they were kept in the main analysis, and repeating the random split without them changes F1 by at most 0.0010.
+Phishing URLs were drawn from PhishTank's public feed, which is the only phishing source we found that ships a reliable, unauthenticated \texttt{submission\_time} timestamp per URL (OpenPhish's community feed and the static UCI Phishing Websites / PhiUSIIL datasets do not carry a comparable per-record date and were excluded from this design for that reason). We retained the submissions of the most recent 180 days, from 20 February to 19 August 2026 (29{,}299 URLs). PhishTank's downloadable feed lists only verified phishing that is still online (every record in our download has \texttt{online} = yes), so phishing reported earlier and already taken down is missing: older weeks contain fewer surviving URLs, and those that survive are likely to be longer-lived than average. Legitimate URLs were sampled from the Tranco top-1M list \cite{lepochat2019tranco} , chosen over alternatives such as the (now-discontinued) Alexa ranking because Tranco is designed to resist the list-manipulation attacks that make raw popularity rankings an unreliable ground truth for security research. Tranco lists domains, not URLs; each sampled domain was turned into a URL by prefixing \texttt{http://} with no path, so every legitimate URL has \texttt{is\_https} $=0$ and \texttt{path\_length} $=0$, whereas 83.4\% of the phishing URLs use \texttt{https}. This asymmetry is examined in the ablation (Discussion). Because Tranco is a single ranked snapshot rather than a dated feed, each sampled legitimate URL was assigned a synthetic timestamp drawn uniformly over the same 180-day window as the phishing data, a deliberate simplification justified because domain reputation for an established, highly ranked site does not meaningfully change on a 180-day horizon, in contrast to phishing infrastructure, which is exactly what this study measures as changing. The final dataset is balanced overall (29{,}299 phishing, 29{,}299 legitimate) but not within temporal blocks: because surviving phishing becomes more frequent towards the end of the window while legitimate timestamps are uniform, the phishing share of the six blocks is 24.8, 45.2, 52.4, 58.3, 57.0, and 62.4\%. Duplicate URLs were not present, but 17{,}637 rows (30.1\%) repeat another row's feature vector, mostly in the legitimate class; they were kept in the main analysis, and repeating the random split without them changes F1 by at most 0.0010.
 
 \subsection{Features}
 We extract 32 lexical features per URL requiring no live network access (URL/hostname/path length, counts of dots/hyphens/digits/special characters, subdomain count, IP-literal hostname flag, presence of a known URL shortener, Shannon entropy of the URL and hostname strings, a count of phishing-associated keywords, and related structural features). Table~\ref{tab:features} lists all 32 with their definitions. Features were standardised with a scaler fitted on the full dataset; refitting it on each training set alone changes logistic regression's mean fixed-design F1 from 0.9899 to 0.9911 and leaves the two tree ensembles unchanged to the third decimal.
@@ -119,10 +200,13 @@ Feature & Definition \\
 \end{table}
 
 \subsection{Temporal evaluation designs}
-Data were sorted by timestamp and divided into six blocks of equal sample count (not of equal class composition; see Data). We evaluate four designs: (i) \emph{random}, an 80/20 random split ignoring time, as a baseline; (ii) \emph{fixed}, training once on block 1 and evaluating separately on blocks 2 through 6, to isolate pure degradation with distance; (iii) \emph{sliding window}, training on block $k$ and evaluating on block $k+1$ for each consecutive pair, simulating periodic retraining on only the most recent data; (iv) \emph{cumulative}, training on blocks $1$ through $k$ and evaluating on block $k+1$, simulating retraining that keeps the full history. All models (random forest~\citep{breiman2001random}, XGBoost~\citep{chen2016xgboost}, logistic regression) share identical standardized features across designs.
+Data were sorted by timestamp and divided into six blocks of equal sample count (not of equal class composition; see Data). We evaluate four designs: (i) \emph{random}, an 80/20 random split ignoring time, as a baseline; (ii) \emph{fixed}, training once on block 1 and evaluating separately on blocks 2 through 6, to isolate pure degradation with distance; (iii) \emph{sliding window}, training on block $k$ and evaluating on block $k+1$ for each consecutive pair, simulating periodic retraining on only the most recent data; (iv) \emph{cumulative}, training on blocks $1$ through $k$ and evaluating on block $k+1$, simulating retraining that keeps the full history. All models (random forest \cite{breiman2001random}, XGBoost \cite{chen2016xgboost}, logistic regression) share identical standardized features across designs.
 
 \subsection{Statistical analysis}
 We regress F1 on temporal distance for the fixed design, per model, pooled naively across models, and pooled with a model fixed effect (ANCOVA: \texttt{f1 \textasciitilde{} distance + model}) to separate the within-model trend with distance from the large between-model differences in baseline F1, which a naive pooled regression otherwise folds into its residual variance and thereby understates the trend's significance. Because a linear regression with only three models provides limited power to detect a common monotonic trend regardless of specification, we additionally run a Page test for a monotonic decreasing trend, treating the three models as judges ranking the five temporal-distance conditions, and cross-check its normal-approximation $p$-value with a Monte Carlo permutation null (100,000 iterations). Both tests treat the three models as independent replicates, but the models are evaluated on the same blocks and share each block's difficulty, so the block is the independent unit. We therefore also test the trend with Spearman's correlation between temporal distance and the mean F1 of the three models per block, with six blocks and, as a sensitivity check, with twelve; and we repeat it with metrics that do not depend on class prevalence (true-positive rate, false-positive rate, balanced accuracy, and F1 on evaluation blocks rebalanced to 50/50 by subsampling the majority class, 20 repetitions). We compare the sliding-window and cumulative strategies with a paired bootstrap over the predictions of each evaluation block (2{,}000 resamples per block, pooled across the five blocks) as the main test, and report the paired Wilcoxon signed-rank test per model for completeness.
+
+\subsection{Use of generative AI tools}
+The authors used Claude (Anthropic; models Claude Sonnet~5 and Claude Opus~5.5) as an assistant for language editing, for support in writing and debugging the analysis code, and for LaTeX formatting. The research questions, study design, data collection, execution of the analyses, results, and their interpretation are the authors' own work; all AI-assisted output was reviewed and verified by the authors, who take full responsibility for the content of this article. No figure was produced with image-generation tools.
 
 \section{Results}
 
@@ -156,7 +240,7 @@ Logistic Regression   & 0.9934 & 0.9899 & 0.9842 \\
 \centering
 \caption{F1 by evaluation block and model (fixed-training design: trained on block 1, evaluated on blocks 2 through 6, at increasing temporal distance).}
 \label{tab:f1-by-block}
-\begin{tabular}{lccc}
+\setlength{\tabcolsep}{9pt}\begin{tabular}{lccc}
 \toprule
 Distance & Random Forest & XGBoost & Logistic Regression \\
 \midrule
@@ -182,7 +266,7 @@ Comparing mitigation strategies, cumulative retraining outperforms sliding-windo
 
 \section{Discussion}
 
-Degradation with temporal displacement is consistent in direction but small and weakly supported, far smaller than the field's framing of concept drift as a first-order threat would suggest. We think this is largely explained by the design of the negative class, not by the phishing detection task being inherently easy: our legitimate URLs come from Tranco's top-ranked, long-established domains, whose lexical signature (short, clean hostnames, no IP literals, low entropy, absence of phishing-associated keywords) is so different from phishing URLs that almost any reasonable classifier separates the two classes with ease, and that separation does not depend much on which specific phishing campaigns happen to be in the training set. A harder, more realistic negative class, such as legitimate URLs on recently registered or low-ranked domains, the same kind of short-lived infrastructure phishers register for their sites~\citep{agarwal2026phishing}, or domains with URL structures that superficially resemble phishing (long paths, subdomains, marketing redirect chains), would very plausibly show a larger temporal gap, because the decision boundary would then depend more on the specific lexical tricks currently in fashion among phishers than on the broad, temporally stable distinction between an established domain and an ad hoc one. Recent large-scale evidence is consistent with this: Agarwal and Vasek~\citep{agarwal2026phishing} analyse 15{,}126 domains registered solely to host phishing, with an average lifetime of 8.6 days, alongside compromised legitimate sites as the other main route; such short-lived domains are by construction absent from top-site rankings like Tranco, so an evaluation whose negatives are all top-ranked domains is likely to understate how hard the task is in operation.
+Degradation with temporal displacement is consistent in direction but small and weakly supported, far smaller than the field's framing of concept drift as a first-order threat would suggest. We think this is largely explained by the design of the negative class, not by the phishing detection task being inherently easy: our legitimate URLs come from Tranco's top-ranked, long-established domains, whose lexical signature (short, clean hostnames, no IP literals, low entropy, absence of phishing-associated keywords) is so different from phishing URLs that almost any reasonable classifier separates the two classes with ease, and that separation does not depend much on which specific phishing campaigns happen to be in the training set. A harder, more realistic negative class, such as legitimate URLs on recently registered or low-ranked domains, the same kind of short-lived infrastructure phishers register for their sites \cite{agarwal2026phishing}, or domains with URL structures that superficially resemble phishing (long paths, subdomains, marketing redirect chains), would very plausibly show a larger temporal gap, because the decision boundary would then depend more on the specific lexical tricks currently in fashion among phishers than on the broad, temporally stable distinction between an established domain and an ad hoc one. Recent large-scale evidence is consistent with this: Agarwal and Vasek \cite{agarwal2026phishing} analyse 15{,}126 domains registered solely to host phishing, with an average lifetime of 8.6 days, alongside compromised legitimate sites as the other main route; such short-lived domains are by construction absent from top-site rankings like Tranco, so an evaluation whose negatives are all top-ranked domains is likely to understate how hard the task is in operation.
 
 \begin{figure}[h]
 \centering
@@ -206,16 +290,17 @@ Because these four features are also plausible artifacts of how the legitimate c
 \centering
 \caption{F1 (fixed-training design, averaged across displaced blocks 2--6) with all 32 features, without the four features tied to legitimate-URL construction (\texttt{is\_https}, \texttt{path\_length}, \texttt{num\_slashes}, \texttt{url\_length}), and without four other important features as a control (\texttt{url\_entropy}, \texttt{num\_dots}, \texttt{num\_subdomains}, \texttt{hostname\_length}). Scaling is fitted on the training block.}
 \label{tab:ablation}
-\begin{tabular}{lccccc}
+\resizebox{\textwidth}{!}{\setlength{\tabcolsep}{7pt}\begin{tabular}{lccccc}
 \toprule
  & & \multicolumn{2}{c}{URL-shape features removed} & \multicolumn{2}{c}{Control features removed} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}
 Model & F1, 32 features & F1 & Drop & F1 & Drop \\
 \midrule
 Random Forest & 0.9944 & 0.9617 & 0.0327 & 0.9906 & 0.0038 \\
 XGBoost & 0.9935 & 0.9601 & 0.0334 & 0.9930 & 0.0005 \\
 Logistic Regression & 0.9911 & 0.9492 & 0.0419 & 0.9873 & 0.0038 \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 The operational risk, then, is not that lexical phishing detectors trained today will fail outright next month. It is that the near-perfect performance reported under a random split (or, as we show, even under most temporal designs against an easy negative class) is a poor guide to performance against near-miss legitimate traffic, which is the regime that actually matters operationally. Whether the degradation trend grows once the negative class is made realistically hard is a question this design cannot answer.
@@ -236,11 +321,9 @@ This research received no external funding. It was conducted within the academic
 \section*{Conflict of Interest}
 The authors declare that they have no conflict of interest.
 
-\section*{Use of Generative AI}
-The authors used generative AI tools (large language models) as an assistant for language editing, support in writing and debugging analysis code, and LaTeX formatting. The research questions, study design, data collection, execution of the analyses, results, and their interpretation are the authors' own work; all AI-assisted output was reviewed and verified by the authors, who take full responsibility for the content of this article. No figure was produced with image-generation tools.
-
 \section*{Author Contributions}
 \textbf{Juan Pablo Aviles-Esparza:} Conceptualization, Methodology, Software, Writing - Original Draft. \textbf{Italo Javier Tenempaguay-Granizo:} Data Curation, Formal Analysis, Validation, Visualization, Writing - Review \& Editing. \textbf{Isaac David Torres-Paredes:} Supervision, Project Administration, Resources, Writing - Review \& Editing.
+
 
 \bibliographystyle{ieeetr}
 \bibliography{refs}
