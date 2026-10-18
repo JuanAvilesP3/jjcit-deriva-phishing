@@ -30,10 +30,10 @@
 \usepackage[textwidth=8cm, margin=0cm, left=4.6cm, right=4.2cm, top=3.9cm, bottom=6.8cm, a4paper, headheight=0.5cm, headsep=0.5cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage[format=plain, labelfont=it, textfont=it, justification=centering]{caption}
-% Pies de figura y tabla: 10 pt cursiva con 11 pt de interlineado y 12 pt antes y despues, como indica la plantilla
+% Figure and table captions: 10 pt italic, 11 pt leading, 12 pt spacing (template)
 \DeclareCaptionFont{jucscap}{\fontsize{10pt}{11pt}\selectfont}
 \captionsetup{font=jucscap, skip=12pt, belowskip=0pt}
-% jucs2e.sty fija \belowcaptionskip en -10pt, lo que monta el pie de una figura sobre el de la tabla siguiente
+% Reset the negative \belowcaptionskip set by jucs2e.sty
 \setlength{\belowcaptionskip}{0pt}
 \setlength{\floatsep}{16pt plus 2pt minus 2pt}
 \setlength{\textfloatsep}{16pt plus 2pt minus 2pt}
@@ -64,8 +64,7 @@
 
 % Main header content
 \header{\paperauthor \papertitle}
-% La cabecera de paginas pares de jucs2e.sty trae fijo el texto de ejemplo de la plantilla;
-% se redefine aqui con los autores y el titulo de este articulo.
+% Running head with the authors and title of this article
 \fancyhead[OC]{%
   {\ifnum\thepage=\startingPage
   \begin{singlespace}
